@@ -20,11 +20,11 @@
   </div>
 
   <!--Searchbar-->
-  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search">
+  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" [(ngModel)]="keywordSearch" (keyup)="searchProducts()">
   </ion-searchbar>
 
   <!--produk-cards-->
-  <span *ngFor="let product of products; let i = index">
+  <span *ngFor="let product of filteredProducts; let i = index">
     <ion-card class="product-cards">
       <ion-thumbnail class="product-thumb">
         <ion-img [src]="product.url" alt="product.nama"></ion-img>
@@ -60,7 +60,7 @@
           <ion-button fill="clear" class="counter-btn" (click)="tambahQty(i)" [disabled]="getQty(i) >= product.stock">
             <ion-icon name="add"></ion-icon>
           </ion-button>
-          
+
         </span>
       </div>
     </ion-card>

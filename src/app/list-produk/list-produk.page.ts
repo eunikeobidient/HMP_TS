@@ -111,4 +111,20 @@ export class ListProdukPage implements OnInit {
   getTotalJenisBarang():number{
     return this.keranjang.length
   }
+
+  keywordSearch: string = ""
+  filteredProducts: Product[] = this.products;
+
+  searchProducts(){
+    const normalizedKeyword = this.keywordSearch.trim().toLowerCase();
+
+    if(normalizedKeyword === ""){
+      this.filteredProducts = this.products;
+      return;
+    }
+
+    this.filteredProducts = this.products.filter(product =>
+      product.nama.toLowerCase().includes(normalizedKeyword)
+    );
+  }
 }
