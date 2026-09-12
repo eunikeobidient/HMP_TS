@@ -1,13 +1,75 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>list_produk</ion-title>
+    <ion-title class="absolute-center">Produk</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">list_produk</ion-title>
+      <ion-title size="large">Produk</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Top Action Row -->
+  <div class="action-header">
+    <h1 class="page-title">Produk</h1>
+    <ion-button color="success" size="small" class="add-button">
+      Tambah Produk
+    </ion-button>
+  </div>
+
+  <!--Searchbar-->
+  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search">
+  </ion-searchbar>
+
+  <!--produk-cards-->
+  <span *ngFor="let product of products; let i = index">
+    <ion-card class="product-cards">
+      <ion-thumbnail class="product-thumb">
+        <ion-img [src]="product.url" alt="product.nama"></ion-img>
+      </ion-thumbnail>
+
+      <div class="product-info">
+        <ion-card-header>
+          <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-label class="stock-label">Stock {{ product.stock }}</ion-label>
+          <br>
+          <ion-label class="price-label">Rp {{ product.harga_jual }}</ion-label>
+        </ion-card-content>
+      </div>
+
+      <div>
+        <!--Tombol plus awal (jika belum di tambahkan di keranjang)-->
+        <ion-button *ngIf="getQty(i) === 0" (click)="tambahAwal(i)"
+          [disabled]="product.stock === 0">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+
+        <!-- Muncul jika qty di keranjang > 0 -->
+        <span *ngIf="getQty(i) > 0">
+          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(i)">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+
+          <span class="counter-text">{{ getQty(i)}}</span>
+
+          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(i)" [disabled]="getQty(i) >= product.stock">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+          
+        </span>
+      </div>
+    </ion-card>
+  </span>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="getTotalJenisBarang() > 0">
+    <ion-fab-button color="success">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-badge color="danger" class="card-badge">{{ getTotalJenisBarang() }}</ion-badge>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

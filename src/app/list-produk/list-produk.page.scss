@@ -1,0 +1,111 @@
+.absolute-center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.page-title {
+    font-weight: 800;
+    font-size: 24px;
+    margin-left: 15px;
+    color: var(--ion-text-color);
+}
+
+.add-button {
+    border-radius: 8px;
+    text-transform: capitalize;
+    margin-right: 15px;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.custom-search {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.product-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 12px;
+}
+
+.product-thumb {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.product-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.custom-title {
+    font-weight: 800;
+    color: var(--ion-text-color);
+}
+
+.stock-label {
+    font-size: 16px;
+    color: var(--ion-color-medium);
+    margin-bottom: 4px;
+}
+
+.price-label {
+    font-size: 20px;
+    font-weight: 650;
+    color: var(--ion-text-color);
+}
+
+.product-cards>div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 105px;
+    min-width: 105px;
+}
+
+.product-cards>div:last-child>span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--ion-color-light);
+    border-radius: 8px;
+    border: 1px solid var(--ion-color-step-150, #ccc);
+    height: 36px;
+    width: 100%;
+}
+
+.counter-btn {
+    --color: var(--ion-color-primary);
+    margin: 0;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    height: 100%;
+}
+
+.counter-text {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--ion-text-color);
+    text-align: center;
+    flex: 1;
+}
