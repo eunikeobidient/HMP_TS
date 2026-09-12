@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'edit-produk',
     loadChildren: () => import('./edit-produk/edit-produk.module').then( m => m.EditProdukPageModule)
   },
+  {
+    path: 'tambah-produk',
+    loadChildren: () => import('./tambah-produk/tambah-produk.module').then( m => m.TambahProdukPageModule)
+  },
 
 ];
 
