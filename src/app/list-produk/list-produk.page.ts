@@ -1,17 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Product {
-  nama: string
-  stock: number
-  harga_jual: number
-  harga_beli: number
-  url: string
-}
-
-interface CartItem{
-  productIndex: number;
-  qty: number;
-}
+import { Router } from '@angular/router';
+import { ProdukService, Produk } from '../services/produk';
+import { KeranjangService } from '../services/keranjang';
 
 @Component({
   selector: 'app-list-produk',
@@ -19,112 +9,69 @@ interface CartItem{
   styleUrls: ['./list-produk.page.scss'],
   standalone: false,
 })
-
 export class ListProdukPage implements OnInit {
+  kataKunciPencarian: string = '';
+  kategoriAktif: string = 'Semua';
+  produkTampil: Produk[] = [];
 
-  constructor() { }
+  constructor(
+    private produkService: ProdukService,
+    private keranjangService: KeranjangService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.muatProduk();
   }
 
-  products: Product[] = [
-    {
-      nama: 'Indomie Goreng',
-      stock: 10,
-      harga_jual: 3000,
-      harga_beli: 2500,
-      url: 'https://placehold.co/600x400/png'
-    },
-    {
-      nama: 'Minyak Goreng 2L',
-      stock: 0,
-      harga_jual: 35000,
-      harga_beli: 32000,
-      url: 'https://placehold.co/600x400/png'
-    },
-    {
-      nama: 'Susu UHT 1L',
-      stock: 25,
-      harga_jual: 18000,
-      harga_beli: 15500,
-      url: 'https://placehold.co/600x400/png'
-    },
-    {
-      nama: 'Beras Premium 5kg',
-      stock: 15,
-      harga_jual: 65000,
-      harga_beli: 58000,
-      url: 'https://placehold.co/600x400/png'
-    },
-    {
-      nama: 'Gula Pasir 1kg',
-      stock: 5,
-      harga_jual: 15000,
-      harga_beli: 13500,
-      url: 'https://placehold.co/600x400/png'
-    }
-  ];
-
-  keranjang: CartItem[] = [];
-
-  // menambahkan barang pertama kali ke array keranjang
-  tambahAwal(index:number){
-    if(this.products[index].stock > 0){
-      this.keranjang.push({ productIndex: index, qty: 1})
-    }
+  ionViewWillEnter() {
+    this.muatProduk();
   }
 
-  // menambahkan qty barang yang sudah ada di keranjang
-  tambahQty(index:number){
-    const item = this.keranjang.find(k => k.productIndex === index)
-    if(item && item.qty < this.products[index].stock){
-      item.qty++;
-    }
+  muatProduk() {
+    this.filterProduk();
   }
 
-  // mengurangi qty barang yang sudah ada di keranjang
-  // jika qty mencapai 0, maka item akan di splice (hapus) dari array keranjang
-  kurangQty(index:number){
-    const itemIndex = this.keranjang.findIndex(k => k.productIndex === index);
-    if(itemIndex > -1){
-      this.keranjang[itemIndex].qty--;
+  filterProduk() {
+    const semuaProduk = this.produkService.getSemuaProduk();
+    const keyword = this.kataKunciPencarian.trim().toLowerCase();
 
-      if(this.keranjang[itemIndex].qty === 0){
-        this.keranjang.splice(itemIndex, 1);
-      }
-    }
+    this.produkTampil = semuaProduk.filter(produk => {
+      const cocokNama = produk.nama.toLowerCase().includes(keyword);
+      const cocokKategori = this.kategoriAktif === 'Semua' || produk.kategori === this.kategoriAktif;
+      return cocokNama && cocokKategori;
+    });
   }
 
-  // mengambil jumlah (qty) produk di dalam keranjang
-  // berdasarkan indexnya, untuk pengecekan tombol plus yang awal
-  getQty(index: number): number{
-    const item = this.keranjang.find(k => k.productIndex === index)
-    if(item){
-      return item.qty
-    } else{
-      return 0
-    }
+  tambahAwal(produk: Produk) {
+    this.keranjangService.tambahItem(produk);
   }
 
-  // Menghitung jumlah jenis barang di dalam keranjang
-  // untuk indikator angka floating di button keranjang
-  getTotalJenisBarang():number{
-    return this.keranjang.length
+  tambahQty(produkId: number) {
+    this.keranjangService.tambahQty(produkId);
   }
 
-  keywordSearch: string = ""
-  filteredProducts: Product[] = this.products;
+  kurangQty(produkId: number) {
+    this.keranjangService.kurangQty(produkId);
+  }
 
-  searchProducts(){
-    const normalizedKeyword = this.keywordSearch.trim().toLowerCase();
+  getQty(produkId: number): number {
+    return this.keranjangService.getQtyItem(produkId);
+  }
 
-    if(normalizedKeyword === ""){
-      this.filteredProducts = this.products;
-      return;
-    }
+  getTotalJenisBarang(): number {
+    return this.keranjangService.hitungTotalJenisItem();
+  }
 
-    this.filteredProducts = this.products.filter(product =>
-      product.nama.toLowerCase().includes(normalizedKeyword)
-    );
+  bukaKeranjang() {
+    this.router.navigate(['/keranjang']);
+  }
+
+  tambahProdukBaru() {
+    this.router.navigate(['/tambah-produk']);
+  }
+
+  bukaDetail(id: number) {
+    this.router.navigate(['/detail-produk', id]);
   }
 }

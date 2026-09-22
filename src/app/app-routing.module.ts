@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'tambah-produk',
     loadChildren: () => import('./tambah-produk/tambah-produk.module').then( m => m.TambahProdukPageModule)
   },
+  {
+    path: 'keranjang',
+    loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)
+  },
 
 ];
 

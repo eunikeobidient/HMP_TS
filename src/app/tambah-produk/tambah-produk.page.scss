@@ -1,0 +1,37 @@
+form {
+  padding-bottom: 20px;
+}
+
+ion-item {
+  margin-bottom: 5px;
+  --highlight-height: 2px;
+}
+
+.text-danger {
+  color: var(--ion-color-danger);
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  padding: 0 16px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.helper-msg {
+  color: var(--ion-color-medium);
+  padding: 0 16px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  padding: 0 10px;
+
+  .submit-btn {
+    margin-bottom: 10px;
+    height: 50px;
+    font-weight: bold;
+  }
+}

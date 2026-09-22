@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="kembali()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Keranjang Belanja</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div *ngIf="daftarKeranjang.length === 0" class="empty-cart">
+    <ion-icon name="cart-outline" size="large" color="medium"></ion-icon>
+    <p>Keranjang Anda kosong.</p>
+    <ion-button color="primary" (click)="kembali()">Belanja Sekarang</ion-button>
+  </div>
+
+  <ion-list *ngIf="daftarKeranjang.length > 0">
+    <ion-item-sliding *ngFor="let item of daftarKeranjang">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img [src]="item.url || 'https://placehold.co/600x400/png'" alt="{{ item.nama }}">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.nama }}</h2>
+          <p>Rp {{ item.harga_jual | number }}</p>
+          <p class="subtotal-label">Subtotal: Rp {{ item.harga_jual * item.qty | number }}</p>
+        </ion-label>
+
+        <div class="item-counter" slot="end">
+          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(item.produkId)">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+          <span class="counter-text">{{ item.qty }}</span>
+          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(item.produkId)"
+            [disabled]="item.qty >= item.stokMaksimal">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+
+      <!-- Swipe to delete, syarat animasi -->
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="hapusItem(item.produkId)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="daftarKeranjang.length > 0">
+  <div class="checkout-card">
+    <div class="checkout-row">
+      <span class="label">Total Belanja:</span>
+      <span class="value total-price">Rp {{ getTotalHarga() | number }}</span>
+    </div>
+
+    <div class="checkout-row">
+      <span class="label">Jenis Pembayaran:</span>
+      <ion-select [(ngModel)]="jenisPembayaran" interface="popover" class="payment-select">
+        <ion-select-option value="Tunai">Tunai</ion-select-option>
+        <ion-select-option value="QRIS">QRIS</ion-select-option>
+        <ion-select-option value="Transfer Bank">Transfer Bank</ion-select-option>
+        <ion-select-option value="E-Wallet">E-Wallet</ion-select-option>
+      </ion-select>
+    </div>
+
+    <ion-button expand="block" color="success" class="confirm-btn" [disabled]="daftarKeranjang.length === 0"
+      (click)="konfirmasiTransaksi()">
+      Konfirmasi Transaksi
+    </ion-button>
+  </div>
+</ion-footer>
