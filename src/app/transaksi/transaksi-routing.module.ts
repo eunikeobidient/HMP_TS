@@ -7,10 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: TransaksiPage
-  },  {
-    path: 'detailtransaksi',
-    loadChildren: () => import('./detailtransaksi/detailtransaksi.module').then( m => m.DetailtransaksiPageModule)
-  }
+  },
 
 ];
 
