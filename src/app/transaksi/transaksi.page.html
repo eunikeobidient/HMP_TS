@@ -1,13 +1,104 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>transaksi</ion-title>
+    <ion-title class="absolute-center">Keranjang</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">transaksi</ion-title>
+      <ion-title size="large">Keranjang</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Top Action Row sama persis list-produk -->
+  <div class="action-header">
+    <h1 class="page-title">Keranjang</h1>
+    <ion-button color="danger" size="small" class="clear-button" fill="clear" (click)="hapusSemua()"
+      *ngIf="cartProduk.length > 0">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Searchbar sama persis list-produk -->
+  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" [(ngModel)]="keywordSearch" (ionInput)="cariProduk()">
+  </ion-searchbar>
+
+  <span *ngFor="let item of filteredProduk; let i = index">
+    <ion-card class="product-cards">
+      <ion-thumbnail class="product-thumb">
+        <ion-img [src]="item.url" [alt]="item.nama"></ion-img>
+      </ion-thumbnail>
+
+      <div class="product-info">
+        <ion-card-header>
+          <ion-card-title class="custom-title">{{ item.nama }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-label class="unit-price-label">Rp {{ item.harga_jual | number }} / pcs</ion-label>
+          <ion-label class="price-container">
+            <span class="stock-label"></span>
+            <span class="price-label">Rp {{ item.harga_jual * item.qty | number }}</span>
+          </ion-label>
+        </ion-card-content>
+      </div>
+
+      <div>
+        <span>
+          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(item)">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+
+          <span class="counter-text">{{ item.qty }}</span>
+
+          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(item)">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </span>
+      </div>
+    </ion-card>
+  </span>
+
+  <div class="empty-state" *ngIf="filteredProduk.length === 0">
+    <ion-icon name="cart-outline" class="empty-icon"></ion-icon>
+    <p class="empty-text">{{ cartProduk.length === 0 ? 'Keranjang masih kosong' : 'Produk tidak ditemukan' }}</p>
+  </div>
+
+  <div class="bottom-spacer"></div>
 </ion-content>
+
+<!-- Panel Checkout Footer -->
+<ion-footer class="ion-no-border">
+  <ion-toolbar style="--background: transparent; --border-width: 0;">
+    <div class="checkout-panel">
+
+      <div class="summary-row">
+        <span class="summary-label">Jumlah Barang:</span>
+        <span class="summary-value">{{ totalItems }} Barang</span>
+      </div>
+
+      <div class="summary-row total-row">
+        <span class="summary-label">Total Belanja:</span>
+        <span class="highlight-total">Rp {{ totalBelanja | number }}</span>
+      </div>
+
+      <div class="payment-method-row">
+        <ion-item lines="none" class="payment-dropdown">
+          <ion-label position="stacked">Metode Pembayaran</ion-label>
+          <ion-select [(ngModel)]="metodePembayaran" interface="action-sheet">
+            <ion-select-option value="tunai">Tunai (Cash)</ion-select-option>
+            <ion-select-option value="qris">QRIS</ion-select-option>
+            <ion-select-option value="transfer">Transfer Bank</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-button expand="block" color="success" class="btn-konfirmasi" shape="round"
+        [disabled]="cartProduk.length === 0" *ngIf="cartProduk.length > 0">
+        Konfirmasi Transaksi
+      </ion-button>
+
+    </div>
+  </ion-toolbar>
+</ion-footer>
