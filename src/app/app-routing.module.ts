@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
-  },  {
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -29,6 +30,26 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'detail-produk',
+    loadChildren: () => import('./detail-produk/detail-produk.module').then( m => m.DetailProdukPageModule)
+  },
+  {
+    path: 'list-produk',
+    loadChildren: () => import('./list-produk/list-produk.module').then( m => m.ListProdukPageModule)
+  },
+  {
+    path: 'edit-produk',
+    loadChildren: () => import('./edit-produk/edit-produk.module').then( m => m.EditProdukPageModule)
+  },
+  {
+    path: 'tambah-produk',
+    loadChildren: () => import('./tambah-produk/tambah-produk.module').then( m => m.TambahProdukPageModule)
+  },
+  {
+    path: 'keranjang',
+    loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)
   },
 
 ];

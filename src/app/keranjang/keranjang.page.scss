@@ -1,0 +1,97 @@
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+}
+
+// Style counter sama dengan list-produk
+.item-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+  border: 1px solid var(--ion-color-step-150, #ccc);
+  height: 36px;
+  width: 105px;
+  min-width: 105px;
+}
+
+.counter-btn {
+  --color: var(--ion-color-primary);
+  margin: 0;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  height: 100%;
+}
+
+.counter-text {
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--ion-text-color);
+  text-align: center;
+  flex: 1;
+}
+
+.subtotal-label {
+  font-weight: bold;
+  color: white !important;
+}
+
+.checkout-card {
+  background: var(--ion-color-light);
+  padding: 15px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+
+  .checkout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .label {
+      font-size: 1rem;
+      color: var(--ion-text-color);
+      font-weight: 600;
+    }
+
+    .value {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--ion-text-color);
+    }
+
+    .total-price {
+      font-size: 1.3rem;
+      color: var(--ion-color-primary);
+    }
+  }
+
+  .payment-select {
+    max-width: 160px;
+    font-size: 0.95rem;
+    color: var(--ion-text-color);
+  }
+
+  .confirm-btn {
+    margin-top: 10px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+}
