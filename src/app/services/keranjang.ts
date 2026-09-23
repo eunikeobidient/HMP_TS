@@ -23,7 +23,13 @@ export class KeranjangService {
   }
 
   tambahItem(produk: Produk): void {
-    const itemExist = this.daftarItem.find(i => i.produkId === produk.id);
+    let itemExist: ItemKeranjang | null = null;
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      if (this.daftarItem[i].produkId === produk.id) {
+        itemExist = this.daftarItem[i];
+      }
+    }
+
     if (itemExist) {
       if (itemExist.qty < produk.stock) {
         itemExist.qty++;
@@ -43,42 +49,62 @@ export class KeranjangService {
   }
 
   tambahQty(produkId: number): void {
-    const item = this.daftarItem.find(i => i.produkId === produkId);
-    if (item && item.qty < item.stokMaksimal) {
-      item.qty++;
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      if (this.daftarItem[i].produkId === produkId) {
+        if (this.daftarItem[i].qty < this.daftarItem[i].stokMaksimal) {
+          this.daftarItem[i].qty++;
+        }
+      }
     }
   }
 
   kurangQty(produkId: number): void {
-    const index = this.daftarItem.findIndex(i => i.produkId === produkId);
-    if (index !== -1) {
-      this.daftarItem[index].qty--;
-      if (this.daftarItem[index].qty === 0) {
-        this.daftarItem.splice(index, 1);
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      if (this.daftarItem[i].produkId === produkId) {
+        this.daftarItem[i].qty--;
+        if (this.daftarItem[i].qty <= 0) {
+          this.hapusPadaIndex(i);
+        }
+        break;
       }
     }
   }
 
   hapusItem(produkId: number): void {
-    const index = this.daftarItem.findIndex(i => i.produkId === produkId);
-    if (index !== -1) {
-      this.daftarItem.splice(index, 1);
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      if (this.daftarItem[i].produkId === produkId) {
+        this.hapusPadaIndex(i);
+        break;
+      }
     }
   }
 
+  // Menghapus 1 elemen di index tertentu TANPA splice() dan TANPA mengganti
+  // objek array-nya -> array yang sama tetap dipakai, cuma isinya digeser & dipendekkan.
+  private hapusPadaIndex(index: number): void {
+    for (let i = index; i < this.daftarItem.length - 1; i++) {
+      this.daftarItem[i] = this.daftarItem[i + 1];
+    }
+    this.daftarItem.length = this.daftarItem.length - 1;
+  }
+
   kosongkanKeranjang(): void {
-    this.daftarItem = [];
+    this.daftarItem.length = 0;   // ganti this.daftarItem = [] biar array-nya tetap sama objeknya
   }
 
   getQtyItem(produkId: number): number {
-    const item = this.daftarItem.find(i => i.produkId === produkId);
-    return item ? item.qty : 0;
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      if (this.daftarItem[i].produkId === produkId) {
+        return this.daftarItem[i].qty;
+      }
+    }
+    return 0;
   }
 
   hitungTotalHarga(): number {
     let total = 0;
-    for (const item of this.daftarItem) {
-      total += item.harga_jual * item.qty;
+    for (let i = 0; i < this.daftarItem.length; i++) {
+      total += this.daftarItem[i].harga_jual * this.daftarItem[i].qty;
     }
     return total;
   }
