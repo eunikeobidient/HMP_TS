@@ -76,13 +76,26 @@ export class TambahProdukPage implements OnInit {
     }
   }
 
+  resetForm() {
+    this.produkBaru = {
+      nama: '',
+      kategori: 'Sembako',
+      harga_beli: 0,
+      harga_jual: 0,
+      stock: 0,
+      url: ''
+    };
+    this.isSubmitted = false;
+  }
+
   onAlertDismiss() {
     this.showAlert = false;
-    this.isSubmitted = false;
+    this.resetForm();
     this.router.navigate(['/list-produk']);
   }
 
   batal() {
+    this.resetForm();
     this.router.navigate(['/list-produk']);
   }
 }
