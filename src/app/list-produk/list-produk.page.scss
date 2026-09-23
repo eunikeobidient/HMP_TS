@@ -66,10 +66,13 @@
 }
 
 .product-thumb {
-    width: 150px;
-    height: 100px;
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    margin-right: 12px;
     cursor: pointer;
+    --border-radius: 8px;
+    border-radius: 8px;
 }
 
 .product-info {
@@ -96,7 +99,7 @@
     color: var(--ion-text-color);
 }
 
-.product-cards > div:last-child {
+.product-cards>div:last-child {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -104,7 +107,7 @@
     min-width: 105px;
 }
 
-.product-cards > div:last-child > span {
+.product-cards>div:last-child>span {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -131,29 +134,36 @@
     flex: 1;
 }
 
-.cart-btn {
-    position: relative;
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: var(--ion-color-medium);
 }
 
-.cart-badge {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 10px;
-    padding: 2px 5px;
-    border-radius: 10px;
+/* =========================================
+   STYLE TOMBOL KERANJANG MELAYANG CUSTOM
+   ========================================= */
+.floating-cart-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
 }
 
-.card-badge {
+.cart-button {
+    margin: 0;
+    --border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.floating-cart-badge {
     position: absolute;
     top: -5px;
     right: -5px;
     font-size: 12px;
     border-radius: 50%;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 30px;
-    color: var(--ion-color-medium);
+    padding: 4px 6px;
+    z-index: 1000;
 }

@@ -14,7 +14,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Top Action Row -->
   <div class="action-header">
     <h1 class="page-title">Produk</h1>
     <ion-button color="success" size="small" class="add-button" (click)="tambahProdukBaru()">
@@ -23,13 +22,14 @@
   </div>
 
   <!--Searchbar-->
-  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" [(ngModel)]="kataKunciPencarian" (ionInput)="filterProduk()">
+  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" [(ngModel)]="kataKunciPencarian"
+    (ionInput)="filterProduk()">
   </ion-searchbar>
 
   <!--Filter Kategori-->
   <div class="filter-kategori">
     <ion-label class="filter-label">Kategori:</ion-label>
-    <ion-select [(ngModel)]="kategoriAktif" (ionChange)="filterProduk()" interface="popover" class="kategori-select">
+    <ion-select [(ngModel)]="kategoriAktif" (change)="filterProduk()" interface="popover" class="kategori-select">
       <ion-select-option value="Semua">Semua</ion-select-option>
       <ion-select-option value="Sembako">Sembako</ion-select-option>
       <ion-select-option value="Makanan">Makanan</ion-select-option>
@@ -38,9 +38,10 @@
     </ion-select>
   </div>
 
-  <!--produk-cards-->
-  <span *ngFor="let product of produkTampil">
+  <!-- Gunakan ng-container untuk menghindari error span bungkus card -->
+  <ng-container *ngFor="let product of produkTampil">
     <ion-card class="product-cards">
+      <!-- Thumbnail kotak simetris (60x60) dari perbaikan sebelumnya -->
       <ion-thumbnail class="product-thumb" (click)="bukaDetail(product.id)">
         <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"></ion-img>
       </ion-thumbnail>
@@ -58,13 +59,10 @@
       </div>
 
       <div>
-        <!--Tombol plus awal (jika belum di tambahkan di keranjang)-->
-        <ion-button *ngIf="getQty(product.id) === 0" (click)="tambahAwal(product)"
-          [disabled]="product.stock === 0">
+        <ion-button *ngIf="getQty(product.id) === 0" (click)="tambahAwal(product)" [disabled]="product.stock === 0">
           <ion-icon name="add-outline"></ion-icon>
         </ion-button>
 
-        <!-- Muncul jika qty di keranjang > 0 -->
         <span *ngIf="getQty(product.id) > 0">
           <ion-button fill="clear" class="counter-btn" (click)="kurangQty(product.id)">
             <ion-icon name="remove"></ion-icon>
@@ -72,22 +70,26 @@
 
           <span class="counter-text">{{ getQty(product.id) }}</span>
 
-          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(product.id)" [disabled]="getQty(product.id) >= product.stock">
+          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(product.id)"
+            [disabled]="getQty(product.id) >= product.stock">
             <ion-icon name="add"></ion-icon>
           </ion-button>
         </span>
       </div>
     </ion-card>
-  </span>
+  </ng-container>
 
   <div class="empty-state" *ngIf="produkTampil.length === 0">
     <p>Tidak ada produk ditemukan.</p>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="getTotalJenisBarang() > 0">
-    <ion-fab-button color="success" (click)="bukaKeranjang()">
-      <ion-icon name="cart-outline"></ion-icon>
-      <ion-badge color="danger" class="card-badge">{{ getTotalJenisBarang() }}</ion-badge>
-    </ion-fab-button>
-  </ion-fab>
+  <!-- Button Keranjang -->
+  <div class="floating-cart-container" *ngIf="getTotalJenisBarang() > 0">
+    <ion-button color="success" class="cart-button" (click)="bukaKeranjang()">
+      <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+    </ion-button>
+    <ion-badge color="danger" class="floating-cart-badge">
+      {{ getTotalJenisBarang() }}
+    </ion-badge>
+  </div>
 </ion-content>
