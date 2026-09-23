@@ -16,7 +16,7 @@ export interface ItemKeranjang {
 export class KeranjangService {
   private daftarItem: ItemKeranjang[] = [];
 
-  constructor() {}
+  constructor() { }
 
   getDaftarItem(): ItemKeranjang[] {
     return this.daftarItem;
@@ -76,14 +76,15 @@ export class KeranjangService {
   }
 
   hitungTotalHarga(): number {
-    return this.daftarItem.reduce((total, item) => total + (item.harga_jual * item.qty), 0);
+    let total = 0;
+    for (const item of this.daftarItem) {
+      total += item.harga_jual * item.qty;
+    }
+    return total;
   }
 
   hitungTotalJenisItem(): number {
     return this.daftarItem.length;
   }
 
-  hitungTotalQuantity(): number {
-    return this.daftarItem.reduce((total, item) => total + item.qty, 0);
-  }
 }

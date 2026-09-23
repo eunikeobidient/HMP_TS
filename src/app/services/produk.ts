@@ -17,16 +17,16 @@ export interface Produk {
 
 export class ProdukService {
   produkList: Produk[] = [
-    { id: 1, nama: 'Beras Premium 5kg', kategori: 'Sembako', harga_beli: 58000, harga_jual: 65000, stock: 15, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 2, nama: 'Minyak Goreng 2L', kategori: 'Sembako', harga_beli: 32000, harga_jual: 35000, stock: 0, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 1, nama: 'Beras Sania 5kg', kategori: 'Sembako', harga_beli: 58000, harga_jual: 65000, stock: 15, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 2, nama: 'Minyak Goreng Bimoli 2L', kategori: 'Sembako', harga_beli: 32000, harga_jual: 35000, stock: 0, url: 'https://placehold.co/600x400/png', terjual: 0 },
     { id: 3, nama: 'Gula Pasir 1kg', kategori: 'Sembako', harga_beli: 13500, harga_jual: 15000, stock: 5, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 4, nama: 'Telur Ayam 1kg', kategori: 'Sembako', harga_beli: 25000, harga_jual: 28000, stock: 10, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 4, nama: 'Telur Ayam Omega 3', kategori: 'Sembako', harga_beli: 25000, harga_jual: 28000, stock: 10, url: 'https://placehold.co/600x400/png', terjual: 0 },
     { id: 5, nama: 'Indomie Goreng', kategori: 'Makanan', harga_beli: 2500, harga_jual: 3000, stock: 10, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 6, nama: 'Susu UHT 1L', kategori: 'Minuman', harga_beli: 15500, harga_jual: 18000, stock: 25, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 7, nama: 'Kopi Bubuk 200g', kategori: 'Minuman', harga_beli: 12000, harga_jual: 15000, stock: 8, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 8, nama: 'Teh Celup Kotak', kategori: 'Minuman', harga_beli: 5000, harga_jual: 7000, stock: 20, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 9, nama: 'Sabun Mandi Cair', kategori: 'Perlengkapan', harga_beli: 18000, harga_jual: 22000, stock: 12, url: 'https://placehold.co/600x400/png', terjual: 0 },
-    { id: 10, nama: 'Pasta Gigi 150g', kategori: 'Perlengkapan', harga_beli: 12000, harga_jual: 15000, stock: 15, url: 'https://placehold.co/600x400/png', terjual: 0 }
+    { id: 6, nama: 'Susu Greenfiled 1L', kategori: 'Minuman', harga_beli: 15500, harga_jual: 18000, stock: 25, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 7, nama: 'Kopi Bubuk Kapal Api', kategori: 'Minuman', harga_beli: 12000, harga_jual: 15000, stock: 8, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 8, nama: 'Teh Sariwangi', kategori: 'Minuman', harga_beli: 5000, harga_jual: 7000, stock: 20, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 9, nama: 'Sabun Dettol', kategori: 'Perlengkapan', harga_beli: 18000, harga_jual: 22000, stock: 12, url: 'https://placehold.co/600x400/png', terjual: 0 },
+    { id: 10, nama: 'Pasta Gigi Pepsodent', kategori: 'Perlengkapan', harga_beli: 12000, harga_jual: 15000, stock: 15, url: 'https://placehold.co/600x400/png', terjual: 0 }
   ];
 
   constructor() { }

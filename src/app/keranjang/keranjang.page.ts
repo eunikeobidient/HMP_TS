@@ -50,10 +50,6 @@ export class KeranjangPage implements OnInit {
     return this.keranjangService.hitungTotalHarga();
   }
 
-  hitungTotalProduk(): number {
-    return this.keranjangService.hitungTotalQuantity();
-  }
-
   konfirmasiTransaksi() {
     if (this.daftarKeranjang.length === 0) {
       this.keranjangKosong = true;

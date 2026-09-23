@@ -61,8 +61,10 @@
       <ion-input label="URL Gambar (Opsional)" labelPlacement="stacked" type="url" [(ngModel)]="produkBaru.url"
         name="url" placeholder="https://..."></ion-input>
     </ion-item>
-    <div class="helper-msg">
-      <small>Kosongkan jika tidak ada, akan diganti gambar default.</small>
+
+    <div *ngIf="produkBaru.url" style="text-align: center; padding: 10px 0;">
+      <img [src]="produkBaru.url" alt="Preview Gambar Produk"
+        style="max-height: 180px; max-width: 100%; border-radius: 8px;" />
     </div>
 
   </ion-list>
