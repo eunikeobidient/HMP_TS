@@ -12,6 +12,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'transaksi',
+    loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
+  },
+  {
+    path: 'detail-transaksi',
+    loadChildren: () => import('./detail-transaksi/detail-transaksi.module').then( m => m.DetailTransaksiPageModule)
+  },
+  {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
   },
