@@ -35,7 +35,7 @@
           </ion-button>
           <span class="counter-text">{{ item.qty }}</span>
           <ion-button fill="clear" class="counter-btn" (click)="tambahQty(item.produkId)"
-            [disabled]="item.qty >= item.stokMaksimal">
+            [disabled]="item.qty >= item.stok">
             <ion-icon name="add"></ion-icon>
           </ion-button>
         </div>

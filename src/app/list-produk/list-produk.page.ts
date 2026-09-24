@@ -43,20 +43,12 @@ export class ListProdukPage implements OnInit {
     });
   }
 
-  tambahAwal(produk: Produk) {
-    this.keranjangService.tambahItem(produk);
+  tambahKeKeranjang(produk: Produk) {
+    this.keranjangService.tambahKeKeranjang(produk);
   }
 
-  tambahQty(produkId: number) {
-    this.keranjangService.tambahQty(produkId);
-  }
-
-  kurangQty(produkId: number) {
-    this.keranjangService.kurangQty(produkId);
-  }
-
-  getQty(produkId: number): number {
-    return this.keranjangService.getQtyItem(produkId);
+  isItemInKeranjang(produkId: number): boolean {
+    return this.keranjangService.getQtyItem(produkId) > 0;
   }
 
   getTotalJenisBarang(): number {

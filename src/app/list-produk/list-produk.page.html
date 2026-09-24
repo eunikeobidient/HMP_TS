@@ -75,22 +75,12 @@
       </div>
 
       <div>
-        <ion-button *ngIf="getQty(product.id) === 0" (click)="tambahAwal(product)" [disabled]="product.stock === 0">
-          <ion-icon name="add-outline"></ion-icon>
+        <ion-button 
+          (click)="tambahKeKeranjang(product)" 
+          [disabled]="product.stock === 0 || isItemInKeranjang(product.id)"
+          [color]="isItemInKeranjang(product.id) ? 'medium' : 'primary'">
+          <ion-icon [name]="isItemInKeranjang(product.id) ? 'checkmark-outline' : 'add-outline'"></ion-icon>
         </ion-button>
-
-        <span *ngIf="getQty(product.id) > 0">
-          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(product.id)">
-            <ion-icon name="remove"></ion-icon>
-          </ion-button>
-
-          <span class="counter-text">{{ getQty(product.id) }}</span>
-
-          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(product.id)"
-            [disabled]="getQty(product.id) >= product.stock">
-            <ion-icon name="add"></ion-icon>
-          </ion-button>
-        </span>
       </div>
     </ion-card>
   </ng-container>
