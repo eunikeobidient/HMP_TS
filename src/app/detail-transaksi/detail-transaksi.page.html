@@ -1,13 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>detail-transaksi</ion-title>
+    <ion-title>Detail Transaksi</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">detail-transaksi</ion-title>
+      <ion-title size="large">Detail Transaksi</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card id="card-header">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label id="nota">{{riwayatTransaksi[index].no_nota}}</ion-label>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-subtitle>Customer: {{riwayatTransaksi[index].customer}}</ion-card-subtitle>
+      <ion-card-subtitle>Tanggal: {{riwayatTransaksi[index].tanggal}} {{showBulan(riwayatTransaksi[index].bulan)}}
+        {{riwayatTransaksi[index].tahun}}</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content *ngFor="let produk of riwayatTransaksi[index].list_produk">
+      <ion-card-subtitle id="nama-produk">{{produk.nama_produk}} (x{{produk.quantity}})</ion-card-subtitle>
+      <ion-card-subtitle id="subtotal">Rp{{produk.subtotal}}</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title id="total">Total: Rp{{riwayatTransaksi[index].harga_total}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

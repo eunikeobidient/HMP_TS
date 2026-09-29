@@ -21,60 +21,45 @@
   </ion-segment>
 
   <div *ngIf="jenisTampilan === 'harian'">
-    <ion-row>
-      <ion-item class="month-year-header" lines="none">
-        <ion-label>September 2026</ion-label>
-      </ion-item>
-    </ion-row>
-    <ion-card class="transaction-item">
-      <ion-card-subtitle class="transaction-date">
-        <h1 class="date">25</h1>
-        <p class="month">Sep</p>
-        <p class="year">2026</p>
-      </ion-card-subtitle>
-      <ion-card-subtitle class="transaction-info">
-        <p class="receipt-number">TMJ25092026002</p>
-        <p>CustomerReceiverName</p>
-        <P>Rp25,000.00</P>
-      </ion-card-subtitle>
-      <ion-button class="btn-detail" routerLink="/detail-transaksi">
-        <ion-label>Detail</ion-label>
-      </ion-button>
-    </ion-card>
+    <div *ngFor="let transaksi of riwayatTransaksi; let i=index">
+      <ion-row *ngIf="transaksi.bulan != bulanSaatIni || transaksi.tahun != tahunSaatIni">
+        <ion-item class="month-year-header" lines="none">
+          <ion-label>{{showHeaderBulanTahun(transaksi.bulan, transaksi.tahun)}}</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-card class="transaction-item">
+        <ion-card-subtitle class="transaction-date">
+          <h1 class="date">{{transaksi.tanggal}}</h1>
+          <p class="month">{{showBulan(transaksi.bulan)}}</p>
+          <p class="year">{{transaksi.tahun}}</p>
+        </ion-card-subtitle>
+        <ion-card-subtitle class="transaction-info">
+          <p class="receipt-number">{{transaksi.no_nota}}</p>
+          <p>{{transaksi.customer}}</p>
+          <P>Rp{{transaksi.harga_total}}</P>
+        </ion-card-subtitle>
+        <ion-button class="btn-detail" routerLink="/detail-transaksi/{{i}}">
+          <ion-label>Detail</ion-label>
+        </ion-button>
+      </ion-card>
+    </div>
   </div>
 
   <div *ngIf="jenisTampilan === 'produk'">
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <ion-card>
+        <ion-col *ngFor="let produk of riwayatProduk" class="product-col">
+          <ion-card class="product-card">
             <ion-card-header>
               <ion-card-title>
-                <h1 class="product-name">Beras</h1>
+                <h4 class="product-name">{{produk.nama_produk}}</h4>
               </ion-card-title>
             </ion-card-header>
-            <ion-card-content>
-              <ion-img class="product-img"
-                src="https://coreimages.lottemart.co.id/ord/06/3ad20f1c-eaa7-4c58-b920-5d08567893fa.webp"></ion-img>
-              <ion-card-subtitle>Jumlah Terjual: 500</ion-card-subtitle>
-              <ion-card-subtitle>Bulan: September</ion-card-subtitle>
-              <ion-card-subtitle>Tahun: 2026</ion-card-subtitle>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>
-                <h1 class="product-name">Beras</h1>
-              </ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-img class="product-img"
-                src="https://coreimages.lottemart.co.id/ord/06/3ad20f1c-eaa7-4c58-b920-5d08567893fa.webp"></ion-img>
-              <ion-card-subtitle>Jumlah Terjual: 500</ion-card-subtitle>
-              <ion-card-subtitle>Bulan: September</ion-card-subtitle>
-              <ion-card-subtitle>Tahun: 2026</ion-card-subtitle>
+            <ion-card-content class="product-content">
+              <ion-img class="product-img" [src]="produk.url"></ion-img>
+              <ion-card-subtitle>Jumlah Terjual: {{produk.jumlah_terjual}}</ion-card-subtitle>
+              <ion-card-subtitle>{{showBulan(produk.bulan)}}</ion-card-subtitle>
+              <ion-card-subtitle>{{produk.tahun}}</ion-card-subtitle>
             </ion-card-content>
           </ion-card>
         </ion-col>
