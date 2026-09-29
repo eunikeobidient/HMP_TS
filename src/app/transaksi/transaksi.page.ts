@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 
-export class TransaksiPage {
-
+export class TransaksiPage{
   jenisTampilan:string = "harian";
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
   }
