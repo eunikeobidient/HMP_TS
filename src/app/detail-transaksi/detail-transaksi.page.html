@@ -24,13 +24,30 @@
   </ion-card>
   <ion-card>
     <ion-card-content *ngFor="let produk of riwayatTransaksi[index].list_produk">
-      <ion-card-subtitle id="nama-produk">{{produk.nama_produk}} (x{{produk.quantity}})</ion-card-subtitle>
-      <ion-card-subtitle id="subtotal">Rp{{produk.subtotal}}</ion-card-subtitle>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto" class="img-col"><ion-img class="produk-img" [src]="findGambarProduk(produk.nama_produk)"></ion-img></ion-col>
+          <ion-col>
+            <ion-card-subtitle id="nama-produk">{{produk.nama_produk}}</ion-card-subtitle>
+            <ion-card-subtitle>
+              <ion-grid>
+                <ion-row >
+                  <ion-col>Quantity : {{produk.quantity}}</ion-col>
+                  <ion-col id="subtotal">Rp {{produk.subtotal}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title id="total">Total: Rp{{riwayatTransaksi[index].harga_total}}</ion-card-title>
+      <ion-card-title id="total">Total: Rp {{riwayatTransaksi[index].harga_total}}</ion-card-title>
     </ion-card-header>
   </ion-card>
+  <ion-button routerLink="/transaksi" id="btnTransaksi">
+    <ion-label>Kembali</ion-label>
+  </ion-button>
 </ion-content>

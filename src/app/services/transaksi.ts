@@ -1,4 +1,5 @@
 import { Service } from '@angular/core';
+import { Produk, ProdukService } from './produk';
 
 export interface RiwayatTransaksi {
     no_nota: string;
@@ -283,58 +284,90 @@ export class Transaksi {
             harga_total: 163000
         }
     ];
-    riwayatProduk: RiwayatProduk[] = [
-        // Bulan 1 Tahun 2024
-        { id: 1, nama_produk: 'Beras Premium 5kg', jumlah_terjual: 3, bulan: 1, tahun: 2024, url: "https://order.lottemart.co.id/_next/image?url=https%3A%2F%2Fcoreimages.lottemart.co.id%2Ford%2F06%2F1092483000&w=1920&q=75" },
-        { id: 2, nama_produk: 'Minyak Goreng 2L', jumlah_terjual: 1, bulan: 1, tahun: 2024, url: "https://down-id.img.susercontent.com/file/sg-11134201-23020-acjeupfkvinv60" },
-        { id: 3, nama_produk: 'Indomie Goreng', jumlah_terjual: 15, bulan: 1, tahun: 2024, url: "https://image.astronauts.cloud/product-images/2026/7/IndomieGorengSpesial_414accae-05bf-440a-b59f-b9b621dc486c_900x900.png" },
-        { id: 4, nama_produk: 'Susu UHT 1L', jumlah_terjual: 2, bulan: 1, tahun: 2024, url: "https://www.static-src.com/siva/asset/09_2024/SusuUHT-Ultra.jpg" },
-        { id: 5, nama_produk: 'Teh Celup Kotak', jumlah_terjual: 1, bulan: 1, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8p5Ohc3k7BJ1myF7kEdzQs-P0qkp9i4HsjLjxlDLFRSgP5vi7PcLC3O0&s=10" },
-        { id: 6, nama_produk: 'Gula Pasir 1kg', jumlah_terjual: 3, bulan: 1, tahun: 2024, url: "https://pasarsegar.co.id/wp-content/uploads/2022/12/71faa2b0-05e0-4263-aa67-2b4b12ec9a95_Gulaku-Gula-Pasir-1-kg-11-1.jpeg" },
-        { id: 7, nama_produk: 'Kopi Bubuk 200g', jumlah_terjual: 2, bulan: 1, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYe34SD95nAz2uQ_V0CQ5NCXON5h3yunmKO_P6kejS9cB2-UAygBH8o6sv&s=10" },
-        { id: 8, nama_produk: 'Telur Ayam 1kg', jumlah_terjual: 2, bulan: 1, tahun: 2024, url: "https://i0.wp.com/raisa.aeonstore.id/wp-content/uploads/2023/08/300605.png?fit=1080%2C1080&ssl=1" },
-        { id: 9, nama_produk: 'Sabun Mandi Cair', jumlah_terjual: 1, bulan: 1, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNUrv4z41ICCZ13G9sViTtjxLWjetwpG6oQooAF_PLIzmqWAWIWYGNwuM&s=10" },
-        { id: 10, nama_produk: 'Pasta Gigi 150g', jumlah_terjual: 1, bulan: 1, tahun: 2024, url: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/102/MTA-173268282/pepsodent_pepsodent-pasta-gigi-ekonomis-150-g_full01.jpg" },
 
-        // Bulan 2 Tahun 2024
-        { id: 11, nama_produk: 'Minyak Goreng 2L', jumlah_terjual: 3, bulan: 2, tahun: 2024, url: "https://down-id.img.susercontent.com/file/sg-11134201-23020-acjeupfkvinv60" },
-        { id: 12, nama_produk: 'Gula Pasir 1kg', jumlah_terjual: 3, bulan: 2, tahun: 2024, url: "https://pasarsegar.co.id/wp-content/uploads/2022/12/71faa2b0-05e0-4263-aa67-2b4b12ec9a95_Gulaku-Gula-Pasir-1-kg-11-1.jpeg" },
-        { id: 13, nama_produk: 'Susu UHT 1L', jumlah_terjual: 4, bulan: 2, tahun: 2024, url: "https://www.static-src.com/siva/asset/09_2024/SusuUHT-Ultra.jpg" },
-        { id: 14, nama_produk: 'Kopi Bubuk 200g', jumlah_terjual: 1, bulan: 2, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYe34SD95nAz2uQ_V0CQ5NCXON5h3yunmKO_P6kejS9cB2-UAygBH8o6sv&s=10" },
-        { id: 15, nama_produk: 'Teh Celup Kotak', jumlah_terjual: 2, bulan: 2, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8p5Ohc3k7BJ1myF7kEdzQs-P0qkp9i4HsjLjxlDLFRSgP5vi7PcLC3O0&s=10" },
-        { id: 16, nama_produk: 'Sabun Mandi Cair', jumlah_terjual: 2, bulan: 2, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNUrv4z41ICCZ13G9sViTtjxLWjetwpG6oQooAF_PLIzmqWAWIWYGNwuM&s=10" },
-        { id: 17, nama_produk: 'Pasta Gigi 150g', jumlah_terjual: 2, bulan: 2, tahun: 2024, url: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/102/MTA-173268282/pepsodent_pepsodent-pasta-gigi-ekonomis-150-g_full01.jpg" },
-        { id: 18, nama_produk: 'Telur Ayam 1kg', jumlah_terjual: 1, bulan: 2, tahun: 2024, url: "https://i0.wp.com/raisa.aeonstore.id/wp-content/uploads/2023/08/300605.png?fit=1080%2C1080&ssl=1" },
-        { id: 19, nama_produk: 'Beras Premium 5kg', jumlah_terjual: 3, bulan: 2, tahun: 2024, url: "https://order.lottemart.co.id/_next/image?url=https%3A%2F%2Fcoreimages.lottemart.co.id%2Ford%2F06%2F1092483000&w=1920&q=75" },
-        { id: 20, nama_produk: 'Indomie Goreng', jumlah_terjual: 20, bulan: 2, tahun: 2024, url: "https://image.astronauts.cloud/product-images/2026/7/IndomieGorengSpesial_414accae-05bf-440a-b59f-b9b621dc486c_900x900.png" },
 
-        // Bulan 3 Tahun 2024
-        { id: 21, nama_produk: 'Telur Ayam 1kg', jumlah_terjual: 5, bulan: 3, tahun: 2024, url: "https://i0.wp.com/raisa.aeonstore.id/wp-content/uploads/2023/08/300605.png?fit=1080%2C1080&ssl=1" },
-        { id: 22, nama_produk: 'Beras Premium 5kg', jumlah_terjual: 2, bulan: 3, tahun: 2024, url: "https://order.lottemart.co.id/_next/image?url=https%3A%2F%2Fcoreimages.lottemart.co.id%2Ford%2F06%2F1092483000&w=1920&q=75" },
-        { id: 23, nama_produk: 'Kopi Bubuk 200g', jumlah_terjual: 3, bulan: 3, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYe34SD95nAz2uQ_V0CQ5NCXON5h3yunmKO_P6kejS9cB2-UAygBH8o6sv&s=10" },
-        { id: 24, nama_produk: 'Indomie Goreng', jumlah_terjual: 15, bulan: 3, tahun: 2024, url: "https://image.astronauts.cloud/product-images/2026/7/IndomieGorengSpesial_414accae-05bf-440a-b59f-b9b621dc486c_900x900.png" },
-        { id: 25, nama_produk: 'Sabun Mandi Cair', jumlah_terjual: 1, bulan: 3, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNUrv4z41ICCZ13G9sViTtjxLWjetwpG6oQooAF_PLIzmqWAWIWYGNwuM&s=10" },
-        { id: 26, nama_produk: 'Teh Celup Kotak', jumlah_terjual: 3, bulan: 3, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8p5Ohc3k7BJ1myF7kEdzQs-P0qkp9i4HsjLjxlDLFRSgP5vi7PcLC3O0&s=10" },
-        { id: 27, nama_produk: 'Susu UHT 1L', jumlah_terjual: 2, bulan: 3, tahun: 2024, url: "https://www.static-src.com/siva/asset/09_2024/SusuUHT-Ultra.jpg" },
-        { id: 28, nama_produk: 'Pasta Gigi 150g', jumlah_terjual: 1, bulan: 3, tahun: 2024, url: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/102/MTA-173268282/pepsodent_pepsodent-pasta-gigi-ekonomis-150-g_full01.jpg" },
-        { id: 29, nama_produk: 'Gula Pasir 1kg', jumlah_terjual: 2, bulan: 3, tahun: 2024, url: "https://pasarsegar.co.id/wp-content/uploads/2022/12/71faa2b0-05e0-4263-aa67-2b4b12ec9a95_Gulaku-Gula-Pasir-1-kg-11-1.jpeg" },
-        { id: 30, nama_produk: 'Minyak Goreng 2L', jumlah_terjual: 3, bulan: 3, tahun: 2024, url: "https://down-id.img.susercontent.com/file/sg-11134201-23020-acjeupfkvinv60" },
-
-        // Bulan 4 Tahun 2024
-        { id: 31, nama_produk: 'Beras Premium 5kg', jumlah_terjual: 3, bulan: 4, tahun: 2024, url: "https://order.lottemart.co.id/_next/image?url=https%3A%2F%2Fcoreimages.lottemart.co.id%2Ford%2F06%2F1092483000&w=1920&q=75" },
-        { id: 32, nama_produk: 'Gula Pasir 1kg', jumlah_terjual: 3, bulan: 4, tahun: 2024, url: "https://pasarsegar.co.id/wp-content/uploads/2022/12/71faa2b0-05e0-4263-aa67-2b4b12ec9a95_Gulaku-Gula-Pasir-1-kg-11-1.jpeg" },
-        { id: 33, nama_produk: 'Susu UHT 1L', jumlah_terjual: 5, bulan: 4, tahun: 2024, url: "https://www.static-src.com/siva/asset/09_2024/SusuUHT-Ultra.jpg" },
-        { id: 34, nama_produk: 'Indomie Goreng', jumlah_terjual: 20, bulan: 4, tahun: 2024, url: "https://image.astronauts.cloud/product-images/2026/7/IndomieGorengSpesial_414accae-05bf-440a-b59f-b9b621dc486c_900x900.png" },
-        { id: 35, nama_produk: 'Kopi Bubuk 200g', jumlah_terjual: 1, bulan: 4, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYe34SD95nAz2uQ_V0CQ5NCXON5h3yunmKO_P6kejS9cB2-UAygBH8o6sv&s=10" },
-        { id: 36, nama_produk: 'Minyak Goreng 2L', jumlah_terjual: 3, bulan: 4, tahun: 2024, url: "https://down-id.img.susercontent.com/file/sg-11134201-23020-acjeupfkvinv60" },
-        { id: 37, nama_produk: 'Sabun Mandi Cair', jumlah_terjual: 2, bulan: 4, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNUrv4z41ICCZ13G9sViTtjxLWjetwpG6oQooAF_PLIzmqWAWIWYGNwuM&s=10" },
-        { id: 38, nama_produk: 'Telur Ayam 1kg', jumlah_terjual: 1, bulan: 4, tahun: 2024, url: "https://i0.wp.com/raisa.aeonstore.id/wp-content/uploads/2023/08/300605.png?fit=1080%2C1080&ssl=1" },
-        { id: 39, nama_produk: 'Teh Celup Kotak', jumlah_terjual: 1, bulan: 4, tahun: 2024, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8p5Ohc3k7BJ1myF7kEdzQs-P0qkp9i4HsjLjxlDLFRSgP5vi7PcLC3O0&s=10" },
-        { id: 40, nama_produk: 'Pasta Gigi 150g', jumlah_terjual: 2, bulan: 4, tahun: 2024, url: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/102/MTA-173268282/pepsodent_pepsodent-pasta-gigi-ekonomis-150-g_full01.jpg" }
-    ];
-    
     listBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     showBulan(bulan: number): string {
-        return this.listBulan[bulan];
+        return this.listBulan[bulan - 1];
     }
+
+    resetTotalTerjual() {
+        for (let produk of ProdukService.produkList) {
+            produk.terjual = 0;
+        }
+    }
+
+    refreshTotalTerjual() {
+        this.resetTotalTerjual();
+        for (let transaksi of this.riwayatTransaksi) {
+            for (let produkBeli of transaksi.list_produk) {
+                for (let produk of ProdukService.produkList) {
+                    if (produk.nama == produkBeli.nama_produk) {
+                        produk.terjual += produkBeli.quantity;
+                    }
+                }
+            }
+        }
+    }
+
+    tambahTotalTerjual(newTransaksi: RiwayatTransaksi) {
+        for (let produkBeli of newTransaksi.list_produk) {
+            for (let produk of ProdukService.produkList) {
+                if (produk.nama == produkBeli.nama_produk) {
+                    produk.terjual += produkBeli.quantity;
+                }
+            }
+        }
+    }
+
+    showRiwayatProduk(bulan: number, tahun: number): RiwayatProduk[] {
+        let riwayatProduk: RiwayatProduk[] = [];
+
+        for (let transaksi of this.riwayatTransaksi) {
+            if (bulan != 0 && transaksi.bulan != bulan) {
+                continue;
+            }
+            if (tahun != 0 && transaksi.tahun != tahun) {
+                continue;
+            }
+            for (let produkBeli of transaksi.list_produk) {
+                let isInRiwayatProduk = false;
+                for (let riwayat of riwayatProduk) {
+                    if (riwayat.nama_produk === produkBeli.nama_produk &&
+                        riwayat.bulan === transaksi.bulan &&
+                        riwayat.tahun === transaksi.tahun) {
+                        riwayat.jumlah_terjual += produkBeli.quantity;
+                        isInRiwayatProduk = true;
+                        break;
+                    }
+                }
+                if (!isInRiwayatProduk) {
+                    let newRiwayatProduk: RiwayatProduk = {
+                        id: riwayatProduk.length + 1,
+                        nama_produk: produkBeli.nama_produk,
+                        jumlah_terjual: produkBeli.quantity,
+                        bulan: transaksi.bulan,
+                        tahun: transaksi.tahun,
+                        url: this.findProdukUrl(produkBeli.nama_produk)
+                    }
+                    riwayatProduk.push(newRiwayatProduk);
+                    isInRiwayatProduk = true;
+                }
+
+            }
+        }
+        return riwayatProduk;
+    }
+
+    findProdukUrl(namaProduk: string): string {
+        let url = ""
+        for (let produk of ProdukService.produkList) {
+            if (produk.nama === namaProduk) {
+                url = produk.url;
+                break;
+            }
+        }
+        return url;
+    }
+
 }

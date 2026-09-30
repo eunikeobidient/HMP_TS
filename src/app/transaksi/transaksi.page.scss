@@ -5,6 +5,19 @@ h1 {
   width: 100%;
 }
 
+.tampilan {
+  position: relative;
+  top: 50px;
+  padding-bottom: 50px;
+}
+
+.fixed-pos {
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  z-index: 20;
+}
+
 .month-year-header {
   width: 100%;
 }
@@ -42,11 +55,17 @@ h1 {
   margin-left: auto;
 }
 
-.product-card{
-  height: 100%;
+#grid-select {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.product-content{
+.product-card {
+  height: 100%;
+  margin: 10px;
+}
+
+.product-content {
   text-align: center;
 }
 

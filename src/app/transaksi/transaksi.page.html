@@ -4,23 +4,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Transaksi</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" style="position:relative">
+  <div class="fixed-pos">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Transaksi</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-segment [(ngModel)]="jenisTampilan">
-    <ion-segment-button value="harian">
-      <ion-label>Harian</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="produk">
-      <ion-label>Produk</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <ion-segment [(ngModel)]="jenisTampilan">
+      <ion-segment-button value="harian">
+        <ion-label>Harian</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="produk">
+        <ion-label>Produk</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-  <div *ngIf="jenisTampilan === 'harian'">
+  <div *ngIf="jenisTampilan === 'harian'" class="tampilan">
     <div *ngFor="let transaksi of riwayatTransaksi; let i=index">
       <ion-row *ngIf="transaksi.bulan != bulanSaatIni || transaksi.tahun != tahunSaatIni">
         <ion-item class="month-year-header" lines="none">
@@ -45,10 +47,36 @@
     </div>
   </div>
 
-  <div *ngIf="jenisTampilan === 'produk'">
-    <ion-grid>
+  <div class="tampilan" *ngIf="jenisTampilan === 'produk'">
+    <ion-grid id="grid-select">
       <ion-row>
-        <ion-col *ngFor="let produk of riwayatProduk" class="product-col">
+        <ion-col style="margin-right:10px">
+          <ion-select label="Bulan" labelPlacement="stacked" placeholder="Pilih Bulan" [(ngModel)]="filterBulan">
+            <ion-select-option *ngFor="let bulan of listBulan; let i = index;"
+              [value]="i+1">{{bulan}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col style="margin-left:10px">
+          <ion-select label="Tahun" labelPlacement="stacked" placeholder="Pilih Tahun" [(ngModel)]="filterTahun">
+            <ion-select-option *ngFor="let tahun of listTahun()" [value]="tahun">{{tahun}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-button style="width: 100%;" (click)="hapusFilterBulanTahun()">
+          <ion-label>Hapus Filter</ion-label>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngFor="let bulanTahun of listBulanTahun()" style="margin-bottom: 20px;">
+      <ion-row>
+        <ion-item class="month-year-header" lines="none"
+          *ngIf="filterRiwayatProduk(bulanTahun.bulan, bulanTahun.tahun).length > 0">
+          <ion-label>{{showHeaderBulanTahun(bulanTahun.bulan, bulanTahun.tahun)}}</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let produk of filterRiwayatProduk(bulanTahun.bulan, bulanTahun.tahun)" class="product-col">
           <ion-card class="product-card">
             <ion-card-header>
               <ion-card-title>
