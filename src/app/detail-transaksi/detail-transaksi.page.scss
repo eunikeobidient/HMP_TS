@@ -1,0 +1,26 @@
+#nota{
+    text-align: center;
+    font-size:larger;
+}
+#card-header{
+    text-align: center;
+}
+#subtotal, #total{
+    text-align: right;
+}
+#nama-produk{
+    font-weight: bold;
+}
+#btnTransaksi{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.produk-img{
+    width: 80px;
+    height: 80px
+}
+.img-col{
+    margin-right: 10px;
+}

@@ -1,5 +1,373 @@
 import { Service } from '@angular/core';
+import { Produk, ProdukService } from './produk';
+
+export interface RiwayatTransaksi {
+    no_nota: string;
+    tanggal: number;
+    customer: string;
+    bulan: number;
+    tahun: number;
+    list_produk: DetailTransaksi[];
+    harga_total: number;
+}
+
+export interface RiwayatProduk {
+    id: number;
+    nama_produk: string;
+    jumlah_terjual: number;
+    bulan: number;
+    tahun: number;
+    url: string;
+}
+
+export interface DetailTransaksi {
+    nama_produk: string;
+    quantity: number;
+    subtotal: number;
+}
 
 @Service()
 export class Transaksi {
+
+    riwayatTransaksi: RiwayatTransaksi[] = [
+        {
+            no_nota: 'TRX-001',
+            tanggal: 10,
+            customer: 'Budi Santoso',
+            bulan: 1,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Beras Premium 5kg', quantity: 2, subtotal: 130000 },
+                { nama_produk: 'Minyak Goreng 2L', quantity: 1, subtotal: 35000 }
+            ],
+            harga_total: 165000
+        },
+        {
+            no_nota: 'TRX-002',
+            tanggal: 12,
+            customer: 'Siti Rahma',
+            bulan: 1,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Indomie Goreng', quantity: 10, subtotal: 30000 },
+                { nama_produk: 'Susu UHT 1L', quantity: 2, subtotal: 36000 },
+                { nama_produk: 'Teh Celup Kotak', quantity: 1, subtotal: 7000 }
+            ],
+            harga_total: 73000
+        },
+        {
+            no_nota: 'TRX-003',
+            tanggal: 15,
+            customer: 'Agus Pratama',
+            bulan: 1,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Gula Pasir 1kg', quantity: 3, subtotal: 45000 },
+                { nama_produk: 'Kopi Bubuk 200g', quantity: 2, subtotal: 30000 }
+            ],
+            harga_total: 75000
+        },
+        {
+            no_nota: 'TRX-004',
+            tanggal: 18,
+            customer: 'Dewi Lestari',
+            bulan: 1,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Telur Ayam 1kg', quantity: 2, subtotal: 56000 },
+                { nama_produk: 'Sabun Mandi Cair', quantity: 1, subtotal: 22000 },
+                { nama_produk: 'Pasta Gigi 150g', quantity: 1, subtotal: 15000 }
+            ],
+            harga_total: 93000
+        },
+        {
+            no_nota: 'TRX-005',
+            tanggal: 22,
+            customer: 'Eko Wijaya',
+            bulan: 1,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 },
+                { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 }
+            ],
+            harga_total: 80000
+        },
+        {
+            no_nota: 'TRX-006',
+            tanggal: 2,
+            customer: 'Rina Kusumah',
+            bulan: 2,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Minyak Goreng 2L', quantity: 2, subtotal: 70000 },
+                { nama_produk: 'Gula Pasir 1kg', quantity: 2, subtotal: 30000 },
+                { nama_produk: 'Susu UHT 1L', quantity: 1, subtotal: 18000 }
+            ],
+            harga_total: 118000
+        },
+        {
+            no_nota: 'TRX-007',
+            tanggal: 5,
+            customer: 'Hadi Kurniawan',
+            bulan: 2,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Kopi Bubuk 200g', quantity: 1, subtotal: 15000 },
+                { nama_produk: 'Teh Celup Kotak', quantity: 2, subtotal: 14000 }
+            ],
+            harga_total: 29000
+        },
+        {
+            no_nota: 'TRX-008',
+            tanggal: 8,
+            customer: 'Maya Putri',
+            bulan: 2,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Sabun Mandi Cair', quantity: 2, subtotal: 44000 },
+                { nama_produk: 'Pasta Gigi 150g', quantity: 2, subtotal: 30000 },
+                { nama_produk: 'Telur Ayam 1kg', quantity: 1, subtotal: 28000 }
+            ],
+            harga_total: 102000
+        },
+        {
+            no_nota: 'TRX-009',
+            tanggal: 14,
+            customer: 'Fajar Nugraha',
+            bulan: 2,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Beras Premium 5kg', quantity: 3, subtotal: 195000 }
+            ],
+            harga_total: 195000
+        },
+        {
+            no_nota: 'TRX-010',
+            tanggal: 20,
+            customer: 'Nia Ramadhani',
+            bulan: 2,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Indomie Goreng', quantity: 20, subtotal: 60000 },
+                { nama_produk: 'Minyak Goreng 2L', quantity: 1, subtotal: 35000 },
+                { nama_produk: 'Gula Pasir 1kg', quantity: 1, subtotal: 15000 },
+                { nama_produk: 'Susu UHT 1L', quantity: 3, subtotal: 54000 }
+            ],
+            harga_total: 164000
+        },
+        {
+            no_nota: 'TRX-011',
+            tanggal: 1,
+            customer: 'Rizky Febian',
+            bulan: 3,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Telur Ayam 1kg', quantity: 3, subtotal: 84000 },
+                { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 }
+            ],
+            harga_total: 149000
+        },
+        {
+            no_nota: 'TRX-012',
+            tanggal: 4,
+            customer: 'Sari Indah',
+            bulan: 3,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Kopi Bubuk 200g', quantity: 3, subtotal: 45000 },
+                { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 }
+            ],
+            harga_total: 60000
+        },
+        {
+            no_nota: 'TRX-013',
+            tanggal: 9,
+            customer: 'Dian Sastro',
+            bulan: 3,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Sabun Mandi Cair', quantity: 1, subtotal: 22000 },
+                { nama_produk: 'Teh Celup Kotak', quantity: 3, subtotal: 21000 },
+                { nama_produk: 'Susu UHT 1L', quantity: 2, subtotal: 36000 }
+            ],
+            harga_total: 79000
+        },
+        {
+            no_nota: 'TRX-014',
+            tanggal: 15,
+            customer: 'Aris Munandar',
+            bulan: 3,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Pasta Gigi 150g', quantity: 1, subtotal: 15000 },
+                { nama_produk: 'Gula Pasir 1kg', quantity: 2, subtotal: 30000 }
+            ],
+            harga_total: 45000
+        },
+        {
+            no_nota: 'TRX-015',
+            tanggal: 22,
+            customer: 'Lia Ananda',
+            bulan: 3,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Minyak Goreng 2L', quantity: 3, subtotal: 105000 },
+                { nama_produk: 'Telur Ayam 1kg', quantity: 2, subtotal: 56000 },
+                { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 },
+                { nama_produk: 'Indomie Goreng', quantity: 10, subtotal: 30000 }
+            ],
+            harga_total: 256000
+        },
+        {
+            no_nota: 'TRX-016',
+            tanggal: 3,
+            customer: 'Tono Sucipto',
+            bulan: 4,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Beras Premium 5kg', quantity: 2, subtotal: 130000 },
+                { nama_produk: 'Gula Pasir 1kg', quantity: 1, subtotal: 15000 }
+            ],
+            harga_total: 145000
+        },
+        {
+            no_nota: 'TRX-017',
+            tanggal: 11,
+            customer: 'Ayu Tingting',
+            bulan: 4,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Susu UHT 1L', quantity: 4, subtotal: 72000 },
+                { nama_produk: 'Indomie Goreng', quantity: 15, subtotal: 45000 },
+                { nama_produk: 'Kopi Bubuk 200g', quantity: 1, subtotal: 15000 }
+            ],
+            harga_total: 132000
+        },
+        {
+            no_nota: 'TRX-018',
+            tanggal: 19,
+            customer: 'Bambang Pamungkas',
+            bulan: 4,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Minyak Goreng 2L', quantity: 2, subtotal: 70000 },
+                { nama_produk: 'Sabun Mandi Cair', quantity: 2, subtotal: 44000 }
+            ],
+            harga_total: 114000
+        },
+        {
+            no_nota: 'TRX-019',
+            tanggal: 25,
+            customer: 'Citra Kirana',
+            bulan: 4,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Telur Ayam 1kg', quantity: 1, subtotal: 28000 },
+                { nama_produk: 'Teh Celup Kotak', quantity: 1, subtotal: 7000 },
+                { nama_produk: 'Pasta Gigi 150g', quantity: 2, subtotal: 30000 }
+            ],
+            harga_total: 65000
+        },
+        {
+            no_nota: 'TRX-020',
+            tanggal: 28,
+            customer: 'Doni Salmanan',
+            bulan: 4,
+            tahun: 2024,
+            list_produk: [
+                { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 },
+                { nama_produk: 'Minyak Goreng 2L', quantity: 1, subtotal: 35000 },
+                { nama_produk: 'Gula Pasir 1kg', quantity: 2, subtotal: 30000 },
+                { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 },
+                { nama_produk: 'Susu UHT 1L', quantity: 1, subtotal: 18000 }
+            ],
+            harga_total: 163000
+        }
+    ];
+
+
+    listBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    showBulan(bulan: number): string {
+        return this.listBulan[bulan - 1];
+    }
+
+    resetTotalTerjual() {
+        for (let produk of ProdukService.produkList) {
+            produk.terjual = 0;
+        }
+    }
+
+    refreshTotalTerjual() {
+        this.resetTotalTerjual();
+        for (let transaksi of this.riwayatTransaksi) {
+            for (let produkBeli of transaksi.list_produk) {
+                for (let produk of ProdukService.produkList) {
+                    if (produk.nama == produkBeli.nama_produk) {
+                        produk.terjual += produkBeli.quantity;
+                    }
+                }
+            }
+        }
+    }
+
+    tambahTotalTerjual(newTransaksi: RiwayatTransaksi) {
+        for (let produkBeli of newTransaksi.list_produk) {
+            for (let produk of ProdukService.produkList) {
+                if (produk.nama == produkBeli.nama_produk) {
+                    produk.terjual += produkBeli.quantity;
+                }
+            }
+        }
+    }
+
+    showRiwayatProduk(bulan: number, tahun: number): RiwayatProduk[] {
+        let riwayatProduk: RiwayatProduk[] = [];
+
+        for (let transaksi of this.riwayatTransaksi) {
+            if (bulan != 0 && transaksi.bulan != bulan) {
+                continue;
+            }
+            if (tahun != 0 && transaksi.tahun != tahun) {
+                continue;
+            }
+            for (let produkBeli of transaksi.list_produk) {
+                let isInRiwayatProduk = false;
+                for (let riwayat of riwayatProduk) {
+                    if (riwayat.nama_produk === produkBeli.nama_produk &&
+                        riwayat.bulan === transaksi.bulan &&
+                        riwayat.tahun === transaksi.tahun) {
+                        riwayat.jumlah_terjual += produkBeli.quantity;
+                        isInRiwayatProduk = true;
+                        break;
+                    }
+                }
+                if (!isInRiwayatProduk) {
+                    let newRiwayatProduk: RiwayatProduk = {
+                        id: riwayatProduk.length + 1,
+                        nama_produk: produkBeli.nama_produk,
+                        jumlah_terjual: produkBeli.quantity,
+                        bulan: transaksi.bulan,
+                        tahun: transaksi.tahun,
+                        url: this.findProdukUrl(produkBeli.nama_produk)
+                    }
+                    riwayatProduk.push(newRiwayatProduk);
+                    isInRiwayatProduk = true;
+                }
+
+            }
+        }
+        return riwayatProduk;
+    }
+
+    findProdukUrl(namaProduk: string): string {
+        let url = ""
+        for (let produk of ProdukService.produkList) {
+            if (produk.nama === namaProduk) {
+                url = produk.url;
+                break;
+            }
+        }
+        return url;
+    }
+
 }

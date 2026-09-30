@@ -1,53 +1,84 @@
-p,h1{
+p,
+h1 {
   margin: 0px;
   padding: 0px;
   width: 100%;
 }
 
-.month-year-header{
+.tampilan {
+  position: relative;
+  top: 50px;
+  padding-bottom: 50px;
+}
+
+.fixed-pos {
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  z-index: 20;
+}
+
+.month-year-header {
   width: 100%;
 }
 
-.transaction-item{
+.transaction-item {
   display: flex;
   padding: 10px;
 }
 
-.transaction-date{
+.transaction-date {
   text-align: center;
   margin-right: 20px;
 }
 
-.date{
+.date {
   font-weight: bold;
   margin: 0px;
 }
 
-.month{
+.month {
   font-size: small;
 }
 
-.transaction-info{
+.transaction-info {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.receipt-number{
+.receipt-number {
   font-weight: bold;
 }
 
-.btn-detail{
+.btn-detail {
   margin-left: auto;
 }
 
-.product-img{
-  width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+#grid-select {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.product-name{
+.product-card {
+  height: 100%;
+  margin: 10px;
+}
+
+.product-content {
   text-align: center;
 }
 
+.product-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-name {
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+}
