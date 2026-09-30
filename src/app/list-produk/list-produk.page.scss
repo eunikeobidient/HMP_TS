@@ -157,3 +157,20 @@
     padding: 30px;
     color: var(--ion-color-medium);
 }
+
+.floating-cart-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.floating-cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 4px 6px;
+    z-index: 1000;
+}

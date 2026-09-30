@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
   <!-- Top Action Row -->
   <div class="action-header">
     <h1 class="page-title">Produk</h1>
-    <ion-button color="success" size="small" class="add-button" (click)="tambahProdukBaru()">
+    <ion-button size="small" class="add-button" (click)="tambahProdukBaru()">
       Tambah Produk
     </ion-button>
   </div>
@@ -84,10 +84,12 @@
     <p>Tidak ada produk ditemukan.</p>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="getTotalJenisBarang() > 0">
-    <ion-fab-button color="success" (click)="bukaKeranjang()">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="floating-cart-container" *ngIf="getTotalJenisBarang() > 0">
+    <ion-fab-button color="success" class="cart-button" (click)="bukaKeranjang()">
       <ion-icon name="cart-outline"></ion-icon>
-      <ion-badge color="danger" class="card-badge">{{ getTotalJenisBarang() }}</ion-badge>
     </ion-fab-button>
+    <ion-badge color="danger" class="floating-cart-badge">
+      {{ getTotalJenisBarang() }}
+    </ion-badge>
   </ion-fab>
 </ion-content>
