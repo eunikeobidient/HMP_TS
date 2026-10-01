@@ -20,7 +20,13 @@
     height: 80px;
 }
 
-.add-label{
+.add-button-2 {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px
+}
+
+.add-label {
     line-height: 20px;
 }
 
@@ -45,17 +51,19 @@
 }
 
 .product-cards {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     padding: 12px;
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom: 12px;
 }
 
+.product-content {
+    display: flex;
+    align-items: center;
+}
+
 .product-thumb {
-    width: 150px;
+    width: 100px;
     height: 100px;
     margin-right: 10px;
     cursor: pointer;
@@ -63,13 +71,18 @@
 
 .product-info {
     display: flex;
-    flex: 1;
     flex-direction: column;
+    margin-left: 10px;
     cursor: pointer;
 }
 
+.product-qty-btn {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
 .custom-title {
-    font-weight: 800;
     color: var(--ion-text-color);
 }
 
@@ -81,19 +94,10 @@
 
 .price-label {
     font-size: 20px;
-    font-weight: 650;
     color: var(--ion-text-color);
 }
 
-.product-cards > div:last-child {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 105px;
-    min-width: 105px;
-}
-
-.product-cards > div:last-child > span {
+.qty-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -101,7 +105,7 @@
     border-radius: 8px;
     border: 1px solid var(--ion-color-step-150, #ccc);
     height: 36px;
-    width: 100%;
+    width: 100px;
 }
 
 .counter-btn {
@@ -162,4 +166,10 @@
     border-radius: 50%;
     padding: 4px 6px;
     z-index: 1000;
+}
+
+#btn-clear {
+    width: 100%;
+    margin: 10px;
+    margin-right: 20px;
 }

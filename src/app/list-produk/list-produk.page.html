@@ -15,15 +15,14 @@
   </ion-header>
 
   <div class="action-header">
-    <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" 
-    [(ngModel)]="kataKunciPencarian" (ionInput)="muatProduk()">
+    <ion-searchbar placeholder="Cari Produk" class="custom-search" [(ngModel)]="kataKunciPencarian"
+      (ionInput)="muatProduk()">
     </ion-searchbar>
     <ion-button class="add-button" routerLink="/tambah-produk">
       <ion-label class="add-label">Tambah Produk</ion-label>
     </ion-button>
   </div>
 
-  <!--Filter Kategori-->
   <div class="filter-kategori">
     <ion-label class="filter-label">Kategori:</ion-label>
     <ion-select [(ngModel)]="kategoriAktif" (ionChange)="muatProduk()" interface="popover" class="kategori-select">
@@ -35,44 +34,47 @@
     </ion-select>
   </div>
 
-  <span *ngFor="let product of produkTampil; let i = index;">
-    <ion-card class="product-cards">
+  <ion-card class="product-cards" *ngFor="let product of produkTampil; let i = index;">
+    <ion-card-header routerLink="/detail-produk/{{i}}">
+      <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="product-content">
       <ion-thumbnail class="product-thumb" routerLink="/detail-produk/{{i}}">
-        <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"></ion-img>
+        <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"
+          class="product-image"></ion-img>
       </ion-thumbnail>
 
-      <div class="product-info" routerLink="/detail-produk/{{i}}">
-        <ion-card-header>
-          <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-          <ion-label class="stock-label">Stok {{ product.stock }}</ion-label>
-          <br>
-          <ion-label class="price-label">Rp {{ product.harga_jual | number }}</ion-label>
-        </ion-card-content>
+      <div class="product-info">
+        <ion-label class="stock-label">Stok {{ product.stock }}</ion-label>
+        <ion-label class="price-label">Rp {{ product.harga_jual | number }}</ion-label>
       </div>
+    </ion-card-content>
+    <div class="product-qty-btn">
+      <ion-button *ngIf="getQty(product.id) === 0" (click)="tambahItem(product)" [disabled]="product.stock === 0">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
 
-      <div>
-        <ion-button *ngIf="getQty(product.id) === 0" (click)="tambahItem(product)" [disabled]="product.stock === 0">
-          <ion-icon name="add-outline"></ion-icon>
+      <div *ngIf="getQty(product.id) > 0" class="qty-button">
+        <ion-button fill="clear" class="counter-btn" (click)="kurangQty(product.id)">
+          <ion-icon name="remove"></ion-icon>
         </ion-button>
 
-        <span *ngIf="getQty(product.id) > 0">
-          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(product.id)">
-            <ion-icon name="remove"></ion-icon>
-          </ion-button>
+        <span class="counter-text">{{ getQty(product.id) }}</span>
 
-          <span class="counter-text">{{ getQty(product.id) }}</span>
-
-          <ion-button fill="clear" class="counter-btn" (click)="tambahQty(product.id)"
-            [disabled]="getQty(product.id) >= product.stock">
-            <ion-icon name="add"></ion-icon>
-          </ion-button>
-        </span>
+        <ion-button fill="clear" class="counter-btn" (click)="tambahQty(product.id)"
+          [disabled]="getQty(product.id) >= product.stock">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
       </div>
-    </ion-card>
-  </span>
+    </div>
+  </ion-card>
+
+  <div style="height: 60px;">
+    <ion-button class="add-button-2" routerLink="/tambah-produk">
+      <ion-label>Tambah Produk</ion-label>
+    </ion-button>
+  </div>
 
   <div class="empty-state" *ngIf="produkTampil.length === 0">
     <p>Tidak ada produk ditemukan.</p>
