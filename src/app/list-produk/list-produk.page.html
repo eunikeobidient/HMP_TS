@@ -21,10 +21,10 @@
     </ion-button>
   </div>
 
-  <!--Searchbar-->
-  <ion-searchbar placeholder="Cari Nama Barang..." class="custom-search" [(ngModel)]="kataKunciPencarian"
-    (ionInput)="filterProduk()">
-  </ion-searchbar>
+  <ion-item lines="full" class="ion-margin-horizontal">
+    <ion-input label="Cari Produk" labelPlacement="stacked" type="text" placeholder="Cari Nama Barang..."
+      [(ngModel)]="kataKunciPencarian" (keyup)="filterProduk()"></ion-input>
+  </ion-item>
 
   <!--Filter Kategori-->
   <div class="filter-kategori ion-padding-horizontal">
@@ -54,36 +54,30 @@
     </div>
   </div>
 
-  <!-- Gunakan ng-container untuk menghindari error span bungkus card -->
-  <ng-container *ngFor="let product of produkTampil">
-    <ion-card class="product-cards">
-      <!-- Thumbnail kotak simetris (60x60) dari perbaikan sebelumnya -->
-      <ion-thumbnail class="product-thumb" (click)="bukaDetail(product.id)">
-        <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"></ion-img>
-      </ion-thumbnail>
+  <ion-card class="product-cards" *ngFor="let product of produkTampil">
+    <div class="product-thumb" (click)="bukaDetail(product.id)">
+      <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"></ion-img>
+    </div>
 
-      <div class="product-info" (click)="bukaDetail(product.id)">
-        <ion-card-header>
-          <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
-        </ion-card-header>
+    <div class="product-info" (click)="bukaDetail(product.id)">
+      <ion-card-header>
+        <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
+      </ion-card-header>
 
-        <ion-card-content>
-          <ion-label class="stock-label">Stok {{ product.stock }}</ion-label>
-          <br>
-          <ion-label class="price-label">Rp {{ product.harga_jual | number }}</ion-label>
-        </ion-card-content>
-      </div>
+      <ion-card-content>
+        <ion-label class="stock-label">Stok {{ product.stock }}</ion-label>
+        <br>
+        <ion-label class="price-label">Rp {{ product.harga_jual }}</ion-label>
+      </ion-card-content>
+    </div>
 
-      <div>
-        <ion-button 
-          (click)="tambahKeKeranjang(product)" 
-          [disabled]="product.stock === 0 || isItemInKeranjang(product.id)"
-          [color]="isItemInKeranjang(product.id) ? 'medium' : 'primary'">
-          <ion-icon [name]="isItemInKeranjang(product.id) ? 'checkmark-outline' : 'add-outline'"></ion-icon>
-        </ion-button>
-      </div>
-    </ion-card>
-  </ng-container>
+    <div>
+      <ion-button (click)="tambahKeKeranjang(product)" [disabled]="product.stock === 0 || isItemInKeranjang(product.id)"
+        [color]="getWarnaTombol(product.id)">
+        <ion-icon [name]="getIkonTombol(product.id)"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
 
   <div class="empty-state" *ngIf="produkTampil.length === 0">
     <p>Tidak ada produk ditemukan.</p>

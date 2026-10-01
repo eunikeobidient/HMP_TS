@@ -9,6 +9,7 @@ import { KeranjangService } from '../services/keranjang';
   styleUrls: ['./list-produk.page.scss'],
   standalone: false,
 })
+
 export class ListProdukPage implements OnInit {
   kataKunciPencarian: string = '';
   kategoriAktif: string = 'Semua';
@@ -36,11 +37,16 @@ export class ListProdukPage implements OnInit {
     const semuaProduk = this.produkService.getSemuaProduk();
     const keyword = this.kataKunciPencarian.trim().toLowerCase();
 
-    this.produkTampil = semuaProduk.filter(produk => {
+    const hasil: Produk[] = [];
+    for (let i = 0; i < semuaProduk.length; i++) {
+      const produk = semuaProduk[i];
       const cocokNama = produk.nama.toLowerCase().includes(keyword);
       const cocokKategori = this.kategoriAktif === 'Semua' || produk.kategori === this.kategoriAktif;
-      return cocokNama && cocokKategori;
-    });
+      if (cocokNama && cocokKategori) {
+        hasil.push(produk);
+      }
+    }
+    this.produkTampil = hasil;
   }
 
   tambahKeKeranjang(produk: Produk) {
@@ -49,6 +55,22 @@ export class ListProdukPage implements OnInit {
 
   isItemInKeranjang(produkId: number): boolean {
     return this.keranjangService.getQtyItem(produkId) > 0;
+  }
+
+  getWarnaTombol(produkId: number): string {
+    if (this.isItemInKeranjang(produkId)) {
+      return 'medium';
+    } else {
+      return 'primary';
+    }
+  }
+
+  getIkonTombol(produkId: number): string {
+    if (this.isItemInKeranjang(produkId)) {
+      return 'checkmark-outline';
+    } else {
+      return 'add-outline';
+    }
   }
 
   getTotalJenisBarang(): number {
