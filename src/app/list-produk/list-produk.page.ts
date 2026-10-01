@@ -13,6 +13,7 @@ export class ListProdukPage implements OnInit {
   kataKunciPencarian: string = '';
   kategoriAktif: string = 'Semua';
   produkTampil: Produk[] = [];
+  totalKeranjang: number = 0;
 
   constructor(
     private produkService: ProdukService,
@@ -29,11 +30,7 @@ export class ListProdukPage implements OnInit {
   }
 
   muatProduk() {
-    this.filterProduk();
-  }
-
-  filterProduk() {
-    const semuaProduk = this.produkService.getSemuaProduk();
+    const semuaProduk = ProdukService.produkList;
     const keyword = this.kataKunciPencarian.trim().toLowerCase();
 
     this.produkTampil = semuaProduk.filter(produk => {
@@ -43,35 +40,26 @@ export class ListProdukPage implements OnInit {
     });
   }
 
-  tambahAwal(produk: Produk) {
+  tambahItem(produk: Produk) {
     this.keranjangService.tambahItem(produk);
+    this.updateTotalKeranjang();
   }
 
   tambahQty(produkId: number) {
     this.keranjangService.tambahQty(produkId);
+    this.updateTotalKeranjang();
   }
 
   kurangQty(produkId: number) {
     this.keranjangService.kurangQty(produkId);
+    this.updateTotalKeranjang();
   }
 
   getQty(produkId: number): number {
-    return this.keranjangService.getQtyItem(produkId);
+    return this.keranjangService.getQty(produkId);
   }
 
-  getTotalJenisBarang(): number {
-    return this.keranjangService.hitungTotalJenisItem();
-  }
-
-  bukaKeranjang() {
-    this.router.navigate(['/keranjang']);
-  }
-
-  tambahProdukBaru() {
-    this.router.navigate(['/tambah-produk']);
-  }
-
-  bukaDetail(id: number) {
-    this.router.navigate(['/detail-produk', id]);
+  updateTotalKeranjang() {
+    this.totalKeranjang = this.keranjangService.hitungTotalJenisItem();
   }
 }

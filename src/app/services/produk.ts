@@ -31,10 +31,6 @@ export class ProdukService {
 
   constructor() { }
 
-  getSemuaProduk(): Produk[] {
-    return ProdukService.produkList;
-  }
-
   getProdukById(id: number): Produk {
     for (let i = 0; i < ProdukService.produkList.length; i++) {
       if (ProdukService.produkList[i].id == id) {

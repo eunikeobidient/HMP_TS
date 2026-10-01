@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'detail-produk',
+    path: 'detail-produk/:id',
     loadChildren: () => import('./detail-produk/detail-produk.module').then( m => m.DetailProdukPageModule)
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     loadChildren: () => import('./list-produk/list-produk.module').then( m => m.ListProdukPageModule)
   },
   {
-    path: 'edit-produk',
+    path: 'edit-produk/:id',
     loadChildren: () => import('./edit-produk/edit-produk.module').then( m => m.EditProdukPageModule)
   },
   {

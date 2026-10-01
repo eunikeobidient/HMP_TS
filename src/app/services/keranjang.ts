@@ -14,76 +14,88 @@ export interface ItemKeranjang {
   providedIn: 'root'
 })
 export class KeranjangService {
-  private daftarItem: ItemKeranjang[] = [];
+  listKeranjang: ItemKeranjang[] = [];
 
-  constructor() {}
+  constructor() { }
 
   getDaftarItem(): ItemKeranjang[] {
-    return this.daftarItem;
+    return this.listKeranjang;
   }
 
-  tambahItem(produk: Produk): void {
-    const itemExist = this.daftarItem.find(i => i.produkId === produk.id);
-    if (itemExist) {
-      if (itemExist.qty < produk.stock) {
-        itemExist.qty++;
+  cekItemDiKeranjang(produkId: number): number {
+    for (let i = 0; i < this.listKeranjang.length; i++) {
+      if (this.listKeranjang[i].produkId === produkId) {
+        return i;
       }
-    } else {
+    }
+    return -1;
+  }
+
+  tambahItem(produk: Produk) {
+    const indexItem = this.cekItemDiKeranjang(produk.id);
+    if (indexItem !== -1) {
+      if (this.listKeranjang[indexItem].qty < produk.stock) {
+        this.listKeranjang[indexItem].qty++;
+      }
+    }
+    else {
       if (produk.stock > 0) {
-        this.daftarItem.push({
+        const newKeranjang: ItemKeranjang = {
           produkId: produk.id,
           nama: produk.nama,
           harga_jual: produk.harga_jual,
           qty: 1,
           stokMaksimal: produk.stock,
           url: produk.url
-        });
+        }
+        this.listKeranjang.push(newKeranjang);
       }
     }
   }
 
-  tambahQty(produkId: number): void {
-    const item = this.daftarItem.find(i => i.produkId === produkId);
-    if (item && item.qty < item.stokMaksimal) {
-      item.qty++;
+  tambahQty(produkId: number) {
+    const indexItem = this.cekItemDiKeranjang(produkId);
+    if (indexItem !== -1 && this.listKeranjang[indexItem].qty <
+      this.listKeranjang[indexItem].stokMaksimal) {
+      this.listKeranjang[indexItem].qty++;
     }
   }
 
-  kurangQty(produkId: number): void {
-    const index = this.daftarItem.findIndex(i => i.produkId === produkId);
-    if (index !== -1) {
-      this.daftarItem[index].qty--;
-      if (this.daftarItem[index].qty === 0) {
-        this.daftarItem.splice(index, 1);
+  kurangQty(produkId: number) {
+    const indexItem = this.cekItemDiKeranjang(produkId);
+    if (indexItem !== -1) {
+      this.listKeranjang[indexItem].qty--;
+      if (this.listKeranjang[indexItem].qty === 0) {
+        this.listKeranjang.splice(indexItem, 1);
       }
     }
   }
 
-  hapusItem(produkId: number): void {
-    const index = this.daftarItem.findIndex(i => i.produkId === produkId);
-    if (index !== -1) {
-      this.daftarItem.splice(index, 1);
+  hapusItem(produkId: number) {
+    const indexItem = this.cekItemDiKeranjang(produkId);
+    if (indexItem !== -1) {
+      this.listKeranjang.splice(indexItem, 1);
     }
   }
 
-  kosongkanKeranjang(): void {
-    this.daftarItem = [];
+  kosongkanKeranjang() {
+    this.listKeranjang = [];
   }
 
-  getQtyItem(produkId: number): number {
-    const item = this.daftarItem.find(i => i.produkId === produkId);
-    return item ? item.qty : 0;
+  getQty(produkId: number): number {
+    const indexItem = this.cekItemDiKeranjang(produkId);
+    return indexItem !== -1 ? this.listKeranjang[indexItem].qty : 0;
   }
 
   hitungTotalHarga(): number {
-    return this.daftarItem.reduce((total, item) => total + (item.harga_jual * item.qty), 0);
+    return this.listKeranjang.reduce((total, item) => total + (item.harga_jual * item.qty), 0);
   }
 
   hitungTotalJenisItem(): number {
-    return this.daftarItem.length;
+    return this.listKeranjang.length;
   }
 
   hitungTotalQuantity(): number {
-    return this.daftarItem.reduce((total, item) => total + item.qty, 0);
+    return this.listKeranjang.reduce((total, item) => total + item.qty, 0);
   }
 }

@@ -285,7 +285,6 @@ export class Transaksi {
         }
     ];
 
-
     listBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     showBulan(bulan: number): string {
         return this.listBulan[bulan - 1];

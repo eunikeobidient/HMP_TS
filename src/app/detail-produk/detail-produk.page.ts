@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail-produk',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class DetailProdukPage implements OnInit {
-
-  constructor() { }
+  index=0;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.index = params['id']);
   }
 
 }
