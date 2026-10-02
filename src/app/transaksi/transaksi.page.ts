@@ -27,7 +27,7 @@ export class TransaksiPage {
   }
 
   ngOnInit() {
-    this.riwayatTransaksi = this.transaksiService.riwayatTransaksi;
+    this.riwayatTransaksi = Transaksi.riwayatTransaksi;
     this.listProduk = ProdukService.produkList;
     this.listBulan = this.transaksiService.listBulan;
   }

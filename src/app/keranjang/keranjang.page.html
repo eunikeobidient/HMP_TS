@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="kembali()">
+      <ion-button routerLink="/list-produk" (click)="hapusCustomerName()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,17 +14,17 @@
   <div *ngIf="daftarKeranjang.length === 0" class="empty-cart">
     <ion-icon name="cart-outline" size="large" color="medium"></ion-icon>
     <p>Keranjang Anda kosong.</p>
-    <ion-button color="primary" (click)="kembali()">Belanja Sekarang</ion-button>
+    <ion-button color="primary" routerLink="/list-produk" (click)="hapusCustomerName()">Belanja Sekarang</ion-button>
   </div>
 
   <ion-list *ngIf="daftarKeranjang.length > 0">
-    <ion-item-sliding *ngFor="let item of daftarKeranjang">
+    <ion-item-sliding *ngFor="let item of daftarKeranjang" style="margin-bottom: 20px;">
+      <ion-label style="margin-left: 10px;">{{ item.nama }}</ion-label>
       <ion-item>
         <ion-thumbnail slot="start">
           <img [src]="item.url || 'https://placehold.co/600x400/png'" alt="{{ item.nama }}">
         </ion-thumbnail>
         <ion-label>
-          <h2>{{ item.nama }}</h2>
           <p>Rp {{ item.harga_jual | number }}</p>
           <p class="subtotal-label">Subtotal: Rp {{ item.harga_jual * item.qty | number }}</p>
         </ion-label>
@@ -41,8 +41,7 @@
         </div>
       </ion-item>
 
-      <!-- Swipe to delete, syarat animasi -->
-      <ion-item-options side="end">
+      <ion-item-options side="end" style="padding-top: 20px;">
         <ion-item-option color="danger" (click)="hapusItem(item.produkId)">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
@@ -57,6 +56,10 @@
     <div class="checkout-row">
       <span class="label">Total Belanja:</span>
       <span class="value total-price">Rp {{ getTotalHarga() | number }}</span>
+    </div>
+
+    <div class="checkout-row" style="border-bottom: 1px solid white;">
+      <ion-input [(ngModel)]="customerName" label="Nama Customer:" placeholder="Masukkan nama"></ion-input>
     </div>
 
     <div class="checkout-row">

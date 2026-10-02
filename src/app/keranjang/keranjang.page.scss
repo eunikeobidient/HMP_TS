@@ -62,23 +62,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     .label {
       font-size: 1rem;
       color: var(--ion-text-color);
-      font-weight: 600;
     }
 
     .value {
       font-size: 1.1rem;
-      font-weight: bold;
       color: var(--ion-text-color);
-    }
-
-    .total-price {
-      font-size: 1.3rem;
-      color: var(--ion-color-primary);
     }
   }
 

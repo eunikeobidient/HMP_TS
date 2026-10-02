@@ -1,5 +1,6 @@
 import { Service } from '@angular/core';
 import { Produk, ProdukService } from './produk';
+import { Injectable } from '@angular/core';
 
 export interface RiwayatTransaksi {
     no_nota: string;
@@ -9,6 +10,7 @@ export interface RiwayatTransaksi {
     tahun: number;
     list_produk: DetailTransaksi[];
     harga_total: number;
+    jenis_transaksi: string;
 }
 
 export interface RiwayatProduk {
@@ -26,10 +28,12 @@ export interface DetailTransaksi {
     subtotal: number;
 }
 
-@Service()
+@Injectable({
+  providedIn: 'root'
+})
 export class Transaksi {
 
-    riwayatTransaksi: RiwayatTransaksi[] = [
+    riwayatTransaksiDummy: RiwayatTransaksi[] = [
         {
             no_nota: 'TRX-001',
             tanggal: 10,
@@ -40,7 +44,8 @@ export class Transaksi {
                 { nama_produk: 'Beras Premium 5kg', quantity: 2, subtotal: 130000 },
                 { nama_produk: 'Minyak Goreng 2L', quantity: 1, subtotal: 35000 }
             ],
-            harga_total: 165000
+            harga_total: 165000,
+            jenis_transaksi: "QRIS",
         },
         {
             no_nota: 'TRX-002',
@@ -53,7 +58,8 @@ export class Transaksi {
                 { nama_produk: 'Susu UHT 1L', quantity: 2, subtotal: 36000 },
                 { nama_produk: 'Teh Celup Kotak', quantity: 1, subtotal: 7000 }
             ],
-            harga_total: 73000
+            harga_total: 73000,
+            jenis_transaksi: "Tunai",
         },
         {
             no_nota: 'TRX-003',
@@ -65,7 +71,8 @@ export class Transaksi {
                 { nama_produk: 'Gula Pasir 1kg', quantity: 3, subtotal: 45000 },
                 { nama_produk: 'Kopi Bubuk 200g', quantity: 2, subtotal: 30000 }
             ],
-            harga_total: 75000
+            harga_total: 75000,
+            jenis_transaksi: "E-wallet",
         },
         {
             no_nota: 'TRX-004',
@@ -78,7 +85,8 @@ export class Transaksi {
                 { nama_produk: 'Sabun Mandi Cair', quantity: 1, subtotal: 22000 },
                 { nama_produk: 'Pasta Gigi 150g', quantity: 1, subtotal: 15000 }
             ],
-            harga_total: 93000
+            harga_total: 93000,
+            jenis_transaksi: "Transfer Bank",
         },
         {
             no_nota: 'TRX-005',
@@ -90,7 +98,8 @@ export class Transaksi {
                 { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 },
                 { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 }
             ],
-            harga_total: 80000
+            harga_total: 80000,
+            jenis_transaksi: "QRIS",
         },
         {
             no_nota: 'TRX-006',
@@ -103,7 +112,8 @@ export class Transaksi {
                 { nama_produk: 'Gula Pasir 1kg', quantity: 2, subtotal: 30000 },
                 { nama_produk: 'Susu UHT 1L', quantity: 1, subtotal: 18000 }
             ],
-            harga_total: 118000
+            harga_total: 118000,
+            jenis_transaksi: "QRIS",
         },
         {
             no_nota: 'TRX-007',
@@ -115,7 +125,8 @@ export class Transaksi {
                 { nama_produk: 'Kopi Bubuk 200g', quantity: 1, subtotal: 15000 },
                 { nama_produk: 'Teh Celup Kotak', quantity: 2, subtotal: 14000 }
             ],
-            harga_total: 29000
+            harga_total: 29000,
+            jenis_transaksi: "QRIS",
         },
         {
             no_nota: 'TRX-008',
@@ -128,7 +139,8 @@ export class Transaksi {
                 { nama_produk: 'Pasta Gigi 150g', quantity: 2, subtotal: 30000 },
                 { nama_produk: 'Telur Ayam 1kg', quantity: 1, subtotal: 28000 }
             ],
-            harga_total: 102000
+            harga_total: 102000,
+            jenis_transaksi: "Transfer Bank"
         },
         {
             no_nota: 'TRX-009',
@@ -139,7 +151,8 @@ export class Transaksi {
             list_produk: [
                 { nama_produk: 'Beras Premium 5kg', quantity: 3, subtotal: 195000 }
             ],
-            harga_total: 195000
+            harga_total: 195000,
+            jenis_transaksi: "E-Wallet",
         },
         {
             no_nota: 'TRX-010',
@@ -153,7 +166,8 @@ export class Transaksi {
                 { nama_produk: 'Gula Pasir 1kg', quantity: 1, subtotal: 15000 },
                 { nama_produk: 'Susu UHT 1L', quantity: 3, subtotal: 54000 }
             ],
-            harga_total: 164000
+            harga_total: 164000,
+            jenis_transaksi: "E-Wallet"
         },
         {
             no_nota: 'TRX-011',
@@ -165,7 +179,8 @@ export class Transaksi {
                 { nama_produk: 'Telur Ayam 1kg', quantity: 3, subtotal: 84000 },
                 { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 }
             ],
-            harga_total: 149000
+            harga_total: 149000,
+            jenis_transaksi: "E-Wallet",
         },
         {
             no_nota: 'TRX-012',
@@ -177,7 +192,8 @@ export class Transaksi {
                 { nama_produk: 'Kopi Bubuk 200g', quantity: 3, subtotal: 45000 },
                 { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 }
             ],
-            harga_total: 60000
+            harga_total: 60000,
+            jenis_transaksi: "Transfer Bank"
         },
         {
             no_nota: 'TRX-013',
@@ -190,7 +206,8 @@ export class Transaksi {
                 { nama_produk: 'Teh Celup Kotak', quantity: 3, subtotal: 21000 },
                 { nama_produk: 'Susu UHT 1L', quantity: 2, subtotal: 36000 }
             ],
-            harga_total: 79000
+            harga_total: 79000,
+            jenis_transaksi: "Transfer Bank"
         },
         {
             no_nota: 'TRX-014',
@@ -202,7 +219,8 @@ export class Transaksi {
                 { nama_produk: 'Pasta Gigi 150g', quantity: 1, subtotal: 15000 },
                 { nama_produk: 'Gula Pasir 1kg', quantity: 2, subtotal: 30000 }
             ],
-            harga_total: 45000
+            harga_total: 45000,
+            jenis_transaksi: "Tunai",
         },
         {
             no_nota: 'TRX-015',
@@ -216,7 +234,8 @@ export class Transaksi {
                 { nama_produk: 'Beras Premium 5kg', quantity: 1, subtotal: 65000 },
                 { nama_produk: 'Indomie Goreng', quantity: 10, subtotal: 30000 }
             ],
-            harga_total: 256000
+            harga_total: 256000,
+            jenis_transaksi: "QRIS",
         },
         {
             no_nota: 'TRX-016',
@@ -228,7 +247,8 @@ export class Transaksi {
                 { nama_produk: 'Beras Premium 5kg', quantity: 2, subtotal: 130000 },
                 { nama_produk: 'Gula Pasir 1kg', quantity: 1, subtotal: 15000 }
             ],
-            harga_total: 145000
+            harga_total: 145000,
+            jenis_transaksi: "E-Wallet",
         },
         {
             no_nota: 'TRX-017',
@@ -241,7 +261,8 @@ export class Transaksi {
                 { nama_produk: 'Indomie Goreng', quantity: 15, subtotal: 45000 },
                 { nama_produk: 'Kopi Bubuk 200g', quantity: 1, subtotal: 15000 }
             ],
-            harga_total: 132000
+            harga_total: 132000,
+            jenis_transaksi: "E-Wallet",
         },
         {
             no_nota: 'TRX-018',
@@ -253,7 +274,8 @@ export class Transaksi {
                 { nama_produk: 'Minyak Goreng 2L', quantity: 2, subtotal: 70000 },
                 { nama_produk: 'Sabun Mandi Cair', quantity: 2, subtotal: 44000 }
             ],
-            harga_total: 114000
+            harga_total: 114000,
+            jenis_transaksi: "QRIS"
         },
         {
             no_nota: 'TRX-019',
@@ -266,7 +288,8 @@ export class Transaksi {
                 { nama_produk: 'Teh Celup Kotak', quantity: 1, subtotal: 7000 },
                 { nama_produk: 'Pasta Gigi 150g', quantity: 2, subtotal: 30000 }
             ],
-            harga_total: 65000
+            harga_total: 65000,
+            jenis_transaksi: "Transfer Bank",
         },
         {
             no_nota: 'TRX-020',
@@ -281,9 +304,13 @@ export class Transaksi {
                 { nama_produk: 'Indomie Goreng', quantity: 5, subtotal: 15000 },
                 { nama_produk: 'Susu UHT 1L', quantity: 1, subtotal: 18000 }
             ],
-            harga_total: 163000
+            harga_total: 163000,
+            jenis_transaksi: "Tunai"
         }
     ];
+    static riwayatTransaksi: RiwayatTransaksi[] = [];
+
+    currentDate = new Date();
 
     listBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     showBulan(bulan: number): string {
@@ -298,7 +325,7 @@ export class Transaksi {
 
     refreshTotalTerjual() {
         this.resetTotalTerjual();
-        for (let transaksi of this.riwayatTransaksi) {
+        for (let transaksi of Transaksi.riwayatTransaksi) {
             for (let produkBeli of transaksi.list_produk) {
                 for (let produk of ProdukService.produkList) {
                     if (produk.nama == produkBeli.nama_produk) {
@@ -322,7 +349,7 @@ export class Transaksi {
     showRiwayatProduk(bulan: number, tahun: number): RiwayatProduk[] {
         let riwayatProduk: RiwayatProduk[] = [];
 
-        for (let transaksi of this.riwayatTransaksi) {
+        for (let transaksi of Transaksi.riwayatTransaksi) {
             if (bulan != 0 && transaksi.bulan != bulan) {
                 continue;
             }
@@ -367,6 +394,19 @@ export class Transaksi {
             }
         }
         return url;
+    }
+
+    hitungJumlahTransaksiHariIni():number{
+        const tanggal = this.currentDate.getDate();
+        const bulan = this.currentDate.getMonth() + 1;
+        const tahun = this.currentDate.getFullYear();
+        let count = 0;
+        for(let transaksi of Transaksi.riwayatTransaksi){
+            if(transaksi.tanggal === tanggal && transaksi.bulan === bulan && transaksi.tahun === tahun){
+                count++;
+            }
+        }
+        return count;
     }
 
 }

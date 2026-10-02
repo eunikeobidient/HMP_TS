@@ -15,10 +15,10 @@ export class DetailTransaksiPage implements OnInit {
   constructor(private route: ActivatedRoute, private transaksiService: Transaksi) { }
   riwayatTransaksi: any[] = [];
   listProduk: any[] = [];
-
+  
   ngOnInit() {
     this.route.params.subscribe(params => { this.index = params['id']; })
-    this.riwayatTransaksi = this.transaksiService.riwayatTransaksi;
+    this.riwayatTransaksi = Transaksi.riwayatTransaksi;
     this.listProduk = ProdukService.produkList;
   }
 

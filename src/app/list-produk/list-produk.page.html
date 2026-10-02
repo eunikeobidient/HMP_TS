@@ -34,13 +34,13 @@
     </ion-select>
   </div>
 
-  <ion-card class="product-cards" *ngFor="let product of produkTampil; let i = index;">
-    <ion-card-header routerLink="/detail-produk/{{i}}">
+  <ion-card class="product-cards" *ngFor="let product of produkTampil">
+    <ion-card-header routerLink="/detail-produk/{{product.id}}">
       <ion-card-title class="custom-title">{{ product.nama }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content class="product-content">
-      <ion-thumbnail class="product-thumb" routerLink="/detail-produk/{{i}}">
+      <ion-thumbnail class="product-thumb" routerLink="/detail-produk/{{product.id}}">
         <ion-img [src]="product.url || 'https://placehold.co/600x400/png'" [alt]="product.nama"
           class="product-image"></ion-img>
       </ion-thumbnail>

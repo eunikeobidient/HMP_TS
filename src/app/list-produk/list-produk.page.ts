@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ProdukService, Produk } from '../services/produk';
 import { KeranjangService } from '../services/keranjang';
 
@@ -16,17 +15,16 @@ export class ListProdukPage implements OnInit {
   totalKeranjang: number = 0;
 
   constructor(
-    private produkService: ProdukService,
-    private keranjangService: KeranjangService,
-    private router: Router
-  ) { }
+    private produkService: ProdukService, private keranjangService: KeranjangService) { }
 
   ngOnInit() {
     this.muatProduk();
+    this.updateTotalKeranjang();
   }
 
   ionViewWillEnter() {
     this.muatProduk();
+    this.updateTotalKeranjang();
   }
 
   muatProduk() {
