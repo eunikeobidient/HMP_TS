@@ -40,7 +40,7 @@ export class ProdukService {
     throw new Error('Produk tidak ditemukan');
   }
 
-  tambahProduk(nama: string, kategori: string, harga_beli: number, harga_jual: number, stock: number, url: string){
+  tambahProduk(nama: string, kategori: string, harga_beli: number, harga_jual: number, stock: number, url: string) {
     let idBaru = 1;
     for (let i = 0; i < ProdukService.produkList.length; i++) {
       if (ProdukService.produkList[i].id >= idBaru) {
@@ -74,18 +74,13 @@ export class ProdukService {
     return false;
   }
 
-  hapusProduk(id: number): boolean {
-    let ditemukan = false;
-    const listBaru: Produk[] = [];
-    for (let produk of ProdukService.produkList) {
-      if (produk.id == id) {
-        ditemukan = true;
-      } else {
-        listBaru.push(produk);
+  hapusProduk(id: number){
+    for (let i = 0; i < ProdukService.produkList.length; i++) {
+      if (ProdukService.produkList[i].id == id) {
+        ProdukService.produkList.splice(i,1);
+        break;
       }
     }
-    ProdukService.produkList = listBaru;
-    return ditemukan;
   }
 
   kurangiStok(id: number, jumlah: number): boolean {

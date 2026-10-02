@@ -88,7 +88,7 @@ export class KeranjangPage implements OnInit {
     const dd = String(tanggal).padStart(2,'0');
     const mm = String(bulan).padStart(2,'0');
 
-    const nota = "TMJ" + dd + mm + noTransaksi;
+    const nota = "TMJ" + dd + mm + tahun + noTransaksi;
 
     const newTransaksi: RiwayatTransaksi = {
       no_nota: nota,
@@ -102,7 +102,7 @@ export class KeranjangPage implements OnInit {
     }
 
     this.transaksiService.tambahTotalTerjual(newTransaksi);
-    Transaksi.riwayatTransaksi.push(newTransaksi);
+    Transaksi.riwayatTransaksi.unshift(newTransaksi);
 
     this.keranjangService.kosongkanKeranjang();
     this.hapusCustomerName();

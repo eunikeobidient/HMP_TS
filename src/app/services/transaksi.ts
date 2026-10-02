@@ -33,9 +33,9 @@ export interface DetailTransaksi {
 })
 export class Transaksi {
 
-    riwayatTransaksiDummy: RiwayatTransaksi[] = [
+    static riwayatTransaksi: RiwayatTransaksi[] = [
         {
-            no_nota: 'TRX-001',
+            no_nota: 'TMJ10012024001',
             tanggal: 10,
             customer: 'Budi Santoso',
             bulan: 1,
@@ -48,7 +48,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS",
         },
         {
-            no_nota: 'TRX-002',
+            no_nota: 'TMJ12012024002',
             tanggal: 12,
             customer: 'Siti Rahma',
             bulan: 1,
@@ -62,7 +62,7 @@ export class Transaksi {
             jenis_transaksi: "Tunai",
         },
         {
-            no_nota: 'TRX-003',
+            no_nota: 'TMJ15012024003',
             tanggal: 15,
             customer: 'Agus Pratama',
             bulan: 1,
@@ -75,7 +75,7 @@ export class Transaksi {
             jenis_transaksi: "E-wallet",
         },
         {
-            no_nota: 'TRX-004',
+            no_nota: 'TMJ18012024004',
             tanggal: 18,
             customer: 'Dewi Lestari',
             bulan: 1,
@@ -89,7 +89,7 @@ export class Transaksi {
             jenis_transaksi: "Transfer Bank",
         },
         {
-            no_nota: 'TRX-005',
+            no_nota: 'TMJ22012024005',
             tanggal: 22,
             customer: 'Eko Wijaya',
             bulan: 1,
@@ -102,7 +102,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS",
         },
         {
-            no_nota: 'TRX-006',
+            no_nota: 'TMJ02022024006',
             tanggal: 2,
             customer: 'Rina Kusumah',
             bulan: 2,
@@ -116,7 +116,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS",
         },
         {
-            no_nota: 'TRX-007',
+            no_nota: 'TMJ05022024007',
             tanggal: 5,
             customer: 'Hadi Kurniawan',
             bulan: 2,
@@ -129,7 +129,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS",
         },
         {
-            no_nota: 'TRX-008',
+            no_nota: 'TMJ08022024008',
             tanggal: 8,
             customer: 'Maya Putri',
             bulan: 2,
@@ -143,7 +143,7 @@ export class Transaksi {
             jenis_transaksi: "Transfer Bank"
         },
         {
-            no_nota: 'TRX-009',
+            no_nota: 'TMJ14022024009',
             tanggal: 14,
             customer: 'Fajar Nugraha',
             bulan: 2,
@@ -155,7 +155,7 @@ export class Transaksi {
             jenis_transaksi: "E-Wallet",
         },
         {
-            no_nota: 'TRX-010',
+            no_nota: 'TMJ20022024010',
             tanggal: 20,
             customer: 'Nia Ramadhani',
             bulan: 2,
@@ -170,7 +170,7 @@ export class Transaksi {
             jenis_transaksi: "E-Wallet"
         },
         {
-            no_nota: 'TRX-011',
+            no_nota: 'TMJ01032024011',
             tanggal: 1,
             customer: 'Rizky Febian',
             bulan: 3,
@@ -183,7 +183,7 @@ export class Transaksi {
             jenis_transaksi: "E-Wallet",
         },
         {
-            no_nota: 'TRX-012',
+            no_nota: 'TMJ04032024012',
             tanggal: 4,
             customer: 'Sari Indah',
             bulan: 3,
@@ -196,7 +196,7 @@ export class Transaksi {
             jenis_transaksi: "Transfer Bank"
         },
         {
-            no_nota: 'TRX-013',
+            no_nota: 'TMJ09032024013',
             tanggal: 9,
             customer: 'Dian Sastro',
             bulan: 3,
@@ -210,7 +210,7 @@ export class Transaksi {
             jenis_transaksi: "Transfer Bank"
         },
         {
-            no_nota: 'TRX-014',
+            no_nota: 'TMJ15032024014',
             tanggal: 15,
             customer: 'Aris Munandar',
             bulan: 3,
@@ -223,7 +223,7 @@ export class Transaksi {
             jenis_transaksi: "Tunai",
         },
         {
-            no_nota: 'TRX-015',
+            no_nota: 'TMJ22032024015',
             tanggal: 22,
             customer: 'Lia Ananda',
             bulan: 3,
@@ -238,7 +238,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS",
         },
         {
-            no_nota: 'TRX-016',
+            no_nota: 'TMJ03042024016',
             tanggal: 3,
             customer: 'Tono Sucipto',
             bulan: 4,
@@ -251,7 +251,7 @@ export class Transaksi {
             jenis_transaksi: "E-Wallet",
         },
         {
-            no_nota: 'TRX-017',
+            no_nota: 'TMJ11042024017',
             tanggal: 11,
             customer: 'Ayu Tingting',
             bulan: 4,
@@ -265,7 +265,7 @@ export class Transaksi {
             jenis_transaksi: "E-Wallet",
         },
         {
-            no_nota: 'TRX-018',
+            no_nota: 'TMJ19042024018',
             tanggal: 19,
             customer: 'Bambang Pamungkas',
             bulan: 4,
@@ -278,7 +278,7 @@ export class Transaksi {
             jenis_transaksi: "QRIS"
         },
         {
-            no_nota: 'TRX-019',
+            no_nota: 'TMJ25042024019',
             tanggal: 25,
             customer: 'Citra Kirana',
             bulan: 4,
@@ -292,7 +292,7 @@ export class Transaksi {
             jenis_transaksi: "Transfer Bank",
         },
         {
-            no_nota: 'TRX-020',
+            no_nota: 'TMJ28042024020',
             tanggal: 28,
             customer: 'Doni Salmanan',
             bulan: 4,
@@ -308,7 +308,6 @@ export class Transaksi {
             jenis_transaksi: "Tunai"
         }
     ];
-    static riwayatTransaksi: RiwayatTransaksi[] = [];
 
     currentDate = new Date();
 

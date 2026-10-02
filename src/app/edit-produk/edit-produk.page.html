@@ -1,13 +1,84 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>edit-produk</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/detail-produk/{{produkId}}">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edit Produk</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edit-produk</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list lines="full">
+
+    <ion-item>
+      <ion-input label="Nama Produk *" labelPlacement="stacked" type="text" [(ngModel)]="produk.nama" name="nama"
+        placeholder="Masukkan nama produk"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="isInvalidNama()">
+      <small>Nama produk wajib diisi (minimal 3 karakter).</small>
+    </div>
+
+    <ion-item>
+      <ion-select label="Kategori *" labelPlacement="stacked" [(ngModel)]="produk.kategori" name="kategori"
+        placeholder="Pilih kategori">
+        <ion-select-option value="Sembako">Sembako</ion-select-option>
+        <ion-select-option value="Makanan">Makanan</ion-select-option>
+        <ion-select-option value="Minuman">Minuman</ion-select-option>
+        <ion-select-option value="Perlengkapan">Perlengkapan</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="error-message" *ngIf="isInvalidKategori()">
+      <small>Kategori produk wajib dipilih.</small>
+    </div>
+
+    <ion-item>
+      <ion-input label="Harga Beli (Rp) *" labelPlacement="stacked" type="number" [(ngModel)]="produk.harga_beli"
+        name="harga_beli" placeholder="Contoh: 10000"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="isInvalidHargaBeli()">
+      <small>Harga beli harus berupa angka valid lebih dari 0.</small>
+    </div>
+
+    <ion-item>
+      <ion-input label="Harga Jual (Rp) *" labelPlacement="stacked" type="number" [(ngModel)]="produk.harga_jual"
+        name="harga_jual" placeholder="Contoh: 15000"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="isInvalidHargaJual()">
+      <small>Harga jual harus berupa angka valid lebih dari 0.</small>
+    </div>
+
+    <ion-item>
+      <ion-input label="Stok *" labelPlacement="stacked" type="number" [(ngModel)]="produk.stock" name="stock"
+        placeholder="Contoh: 10"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="isInvalidStock()">
+      <small>Stok tidak boleh kosong atau negatif.</small>
+    </div>
+
+    <ion-item>
+      <ion-input label="URL Gambar (Opsional)" labelPlacement="stacked" type="url" [(ngModel)]="produk.url"
+        name="url" placeholder="https://..."></ion-input>
+    </ion-item>
+    <div class="helper-msg">
+      <small>Kosongkan jika tidak ada, akan diganti gambar default.</small>
+    </div>
+
+  </ion-list>
+
+  <div class="action-buttons">
+    <ion-button expand="block" color="success" (click)="simpanProduk()" class="submit-btn">
+      Simpan Produk
+    </ion-button>
+
+    <ion-alert [isOpen]="showAlert" header="Simpan Produk" message="Produk berhasil ditambahkan!"
+      [buttons]="alertButtons" (didDismiss)="onAlertDismiss()">
+    </ion-alert>
+
+    <ion-button expand="block" color="medium" fill="clear" routerLink="/detail-produk/{{produkId}}">
+      Batal
+    </ion-button>
+  </div>
+
 </ion-content>

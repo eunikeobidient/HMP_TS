@@ -1,0 +1,35 @@
+ion-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ion-img {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+ion-card-content {
+    width: 100%;
+}
+
+.value-label {
+    font-size: 1.03rem;
+    color: var(--ion-text-color);
+}
+
+.property-label{
+    padding-left: 50px;
+    color: var(--ion-text-color);
+}
+
+.btn-bottom {
+    width: 100%;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.btn-label{
+    font-weight: bold;
+}

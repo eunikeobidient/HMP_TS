@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-button routerLink="/list-produk">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Detail Produk</ion-title>
   </ion-toolbar>
@@ -13,7 +15,45 @@
       <ion-title size="large">Detail Produk</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div>
-    {{index}}
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label>{{produk.nama}}</ion-label>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="produk.url"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-card-subtitle class="property-label">Kategori</ion-card-subtitle></ion-col>
+          <ion-col><ion-card-subtitle class="value-label">: {{produk.kategori}}</ion-card-subtitle></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-card-subtitle class="property-label">Harga Beli</ion-card-subtitle></ion-col>
+          <ion-col><ion-card-subtitle class="value-label">: Rp {{produk.harga_beli}}</ion-card-subtitle></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-card-subtitle class="property-label">Harga Jual</ion-card-subtitle></ion-col>
+          <ion-col><ion-card-subtitle class="value-label">: Rp {{produk.harga_jual}}</ion-card-subtitle></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-card-subtitle class="property-label">Stok</ion-card-subtitle></ion-col>
+          <ion-col><ion-card-subtitle class="value-label">: {{produk.stock}} pcs</ion-card-subtitle></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-card-subtitle class="property-label">Terjual</ion-card-subtitle></ion-col>
+          <ion-col><ion-card-subtitle class="value-label">: {{produk.terjual}} pcs</ion-card-subtitle></ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="btn-bottom" color="success" routerLink="/edit-produk/{{produk.id}}">
+        <ion-label class="btn-label">Edit</ion-label>
+      </ion-button>
+      <ion-button class="btn-bottom" color="danger" (click)="showAlertHapus()">
+        <ion-label class="btn-label">Hapus</ion-label>
+      </ion-button>
+      <ion-alert [isOpen]="showAlert" header="Simpan Produk" message="Yakin ingin menghapus produk ini?"
+        [buttons]="alertButtons" (didDismiss)="onAlertDismiss()">
+      </ion-alert>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

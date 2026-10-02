@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RiwayatProduk, Transaksi } from '../services/transaksi';
+import { RiwayatProduk, RiwayatTransaksi, Transaksi } from '../services/transaksi';
 import { Produk, ProdukService } from '../services/produk';
 
 @Component({
@@ -27,7 +27,7 @@ export class TransaksiPage {
   }
 
   ngOnInit() {
-    this.riwayatTransaksi = Transaksi.riwayatTransaksi;
+    this.riwayatTransaksi = Transaksi.riwayatTransaksi.reverse();
     this.listProduk = ProdukService.produkList;
     this.listBulan = this.transaksiService.listBulan;
   }
