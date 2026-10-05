@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { KeranjangService, ItemKeranjang } from '../services/keranjang';
-import { ProdukService } from '../services/produk';
-import { DetailTransaksi, RiwayatTransaksi, Transaksi } from '../services/transaksi';
+import { ItemKeranjang, Keranjang } from '../keranjang';
+import { Produk } from '../produk';
+import { DetailTransaksi, RiwayatTransaksi, Transaksi } from '../transaksi';
 
 @Component({
   selector: 'app-keranjang',
@@ -11,66 +11,62 @@ import { DetailTransaksi, RiwayatTransaksi, Transaksi } from '../services/transa
   standalone: false,
 })
 
-export class KeranjangPage implements OnInit {
-  daftarKeranjang: ItemKeranjang[] = []
+export class KeranjangPage {
+  keranjangItem: ItemKeranjang[] = [];
   jenisPembayaran: string = 'Tunai';
   customerName = "";
   keranjangKosong: boolean = false;
+  namaKosong: boolean = false;
   public alertButtons = ['OK'];
 
   currentDate = new Date();
 
   constructor(
-    private keranjangService: KeranjangService,
-    private produkService: ProdukService,
+    private keranjang: Keranjang,
+    private produkService: Produk,
     private transaksiService: Transaksi,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.loadListKeranjang();
-  }
-
-  ionViewWillEnter(){
-    this.loadListKeranjang();
-  }
-
-  loadListKeranjang() {
-    this.daftarKeranjang = KeranjangService.listKeranjang;
+    this.keranjangItem = Keranjang.listKeranjang;
   }
 
   tambahQty(produkId: number) {
-    this.keranjangService.tambahQty(produkId);
-    this.loadListKeranjang();
+    this.keranjang.tambahQty(produkId);
   }
 
   kurangQty(produkId: number) {
-    this.keranjangService.kurangQty(produkId);
-    this.loadListKeranjang();
+    this.keranjang.kurangQty(produkId);
   }
 
   hapusItem(produkId: number) {
-    this.keranjangService.hapusItem(produkId);
-    this.loadListKeranjang();
+    this.keranjang.hapusItem(produkId);
   }
 
   getTotalHarga(): number {
-    return this.keranjangService.hitungTotalHarga();
+    return this.keranjang.hitungTotalHarga();
   }
 
   hitungTotalProduk(): number {
-    this.loadListKeranjang();
-    return this.keranjangService.hitungTotalQuantity();
+    return this.keranjang.hitungTotalQuantity();
   }
 
   konfirmasiTransaksi() {
-    if (KeranjangService.listKeranjang.length === 0) {
+    this.customerName = this.customerName.trim();
+
+    if(this.customerName == ""){
+      this.namaKosong = true;
+      return;
+    }
+
+    if (Keranjang.listKeranjang.length === 0) {
       this.keranjangKosong = true;
       return;
     }
 
     const detailTransaksi: DetailTransaksi[] = []
-    for (let item of KeranjangService.listKeranjang) {
+    for (let item of Keranjang.listKeranjang) {
       this.produkService.kurangiStok(item.produkId, item.qty);
       let newDetailTransaksi = {
         nama_produk: item.nama,
@@ -104,12 +100,13 @@ export class KeranjangPage implements OnInit {
     this.transaksiService.tambahTotalTerjual(newTransaksi);
     Transaksi.riwayatTransaksi.unshift(newTransaksi);
 
-    this.keranjangService.kosongkanKeranjang();
+    this.keranjang.kosongkanKeranjang();
     this.hapusCustomerName();
-    this.router.navigate(['/list-produk']);
+    this.router.navigate(['/detail-transaksi', 0]);
   }
 
   hapusCustomerName(){
     this.customerName = "";
+    this.jenisPembayaran = "Tunai";
   }
 }

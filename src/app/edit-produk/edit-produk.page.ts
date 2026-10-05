@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { ProdukService } from '../services/produk';
+import { Produk } from '../produk';
 
 @Component({
   selector: 'app-edit-produk',
@@ -25,10 +25,10 @@ export class EditProdukPage implements OnInit {
   showAlert = false;
   public alertButtons = ['OK'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private produkService: ProdukService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private produkService: Produk) { }
   produkId = -1;
   ngOnInit() {
-    this.route.params.subscribe(params => this.produkId = params['id']);
+    this.route.params.subscribe(params => this.produkId = Number(params['id']));
     this.produk = this.produkService.getProdukById(this.produkId);
   }
 

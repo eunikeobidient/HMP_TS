@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/list-produk" (click)="hapusCustomerName()">
+      <ion-button routerLink="/list-produk">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,14 +11,14 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <div *ngIf="daftarKeranjang.length === 0" class="empty-cart">
+  <div *ngIf="keranjangItem.length === 0" class="empty-cart">
     <ion-icon name="cart-outline" size="large" color="medium"></ion-icon>
     <p>Keranjang Anda kosong.</p>
     <ion-button color="primary" routerLink="/list-produk" (click)="hapusCustomerName()">Belanja Sekarang</ion-button>
   </div>
 
-  <ion-list *ngIf="daftarKeranjang.length > 0">
-    <ion-item-sliding *ngFor="let item of daftarKeranjang" style="margin-bottom: 20px;">
+  <ion-list *ngIf="keranjangItem.length > 0">
+    <ion-item-sliding *ngFor="let item of keranjangItem" style="margin-bottom: 20px;">
       <ion-label style="margin-left: 10px;">{{ item.nama }}</ion-label>
       <ion-item>
         <ion-thumbnail slot="start">
@@ -30,7 +30,7 @@
         </ion-label>
 
         <div class="item-counter" slot="end">
-          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(item.produkId)">
+          <ion-button fill="clear" class="counter-btn" (click)="kurangQty(item.produkId)" [disabled]="item.qty == 1">
             <ion-icon name="remove"></ion-icon>
           </ion-button>
           <span class="counter-text">{{ item.qty }}</span>
@@ -51,7 +51,7 @@
 
 </ion-content>
 
-<ion-footer *ngIf="daftarKeranjang.length > 0">
+<ion-footer *ngIf="keranjangItem.length > 0">
   <div class="checkout-card">
     <div class="checkout-row">
       <span class="label">Total Belanja:</span>
@@ -72,9 +72,13 @@
       </ion-select>
     </div>
 
-    <ion-button expand="block" color="success" class="confirm-btn" [disabled]="daftarKeranjang.length === 0"
-      (click)="konfirmasiTransaksi()">
+    <ion-button id="btnSubmit" expand="block" color="success" class="confirm-btn"
+      [disabled]="keranjangItem.length === 0" (click)="konfirmasiTransaksi()">
       Konfirmasi Transaksi
     </ion-button>
+
+    <ion-alert [isOpen]="namaKosong" (didDismiss)="namaKosong = false" header="KESALAHAN" subHeader="Nama Masih Kosong!"
+      message="Mohon lengkapi nama customer sebelum melanjutkan." [buttons]="alertButtons">
+    </ion-alert>
   </div>
 </ion-footer>

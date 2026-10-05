@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdukService, Produk } from '../services/produk';
-import { KeranjangService } from '../services/keranjang';
+import { Produk, Produk_Temp } from '../produk';
+import { Keranjang } from '../keranjang';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-list-produk',
@@ -8,56 +9,72 @@ import { KeranjangService } from '../services/keranjang';
   styleUrls: ['./list-produk.page.scss'],
   standalone: false,
 })
-export class ListProdukPage implements OnInit {
+
+export class ListProdukPage {
   kataKunciPencarian: string = '';
   kategoriAktif: string = 'Semua';
-  produkTampil: Produk[] = [];
-  totalKeranjang: number = 0;
+  produkTampil: Produk_Temp[] = [];
 
-  constructor(
-    private produkService: ProdukService, private keranjangService: KeranjangService) { }
+  constructor(private produkService: Produk, private keranjangService: Keranjang) { }
 
   ngOnInit() {
-    this.muatProduk();
-    this.updateTotalKeranjang();
-  }
-
-  ionViewWillEnter() {
-    this.muatProduk();
-    this.updateTotalKeranjang();
+    this.produkTampil = Produk.produkList;
   }
 
   muatProduk() {
-    const semuaProduk = ProdukService.produkList;
-    const keyword = this.kataKunciPencarian.trim().toLowerCase();
-
-    this.produkTampil = semuaProduk.filter(produk => {
-      const cocokNama = produk.nama.toLowerCase().includes(keyword);
-      const cocokKategori = this.kategoriAktif === 'Semua' || produk.kategori === this.kategoriAktif;
-      return cocokNama && cocokKategori;
-    });
+    const keyword = this.kataKunciPencarian.trim();
+    this.filterProduk(keyword, this.kategoriAktif);
   }
 
-  tambahItem(produk: Produk) {
+  filterProduk(nama: string = "", kategori: string = "Semua") {
+    if (nama === "") {
+      if (kategori === "Semua") {
+        this.produkTampil = Produk.produkList;
+      } else {
+        let temporaryArray = [];
+        for (let produk of Produk.produkList) {
+          if (produk.kategori === kategori) {
+            temporaryArray.push(produk);
+          }
+        }
+        this.produkTampil = temporaryArray;
+      }
+    } else {
+      let temporaryArray = [];
+      if (kategori === "Semua") {
+        for (let produk of Produk.produkList) {
+          if (produk.nama.toLowerCase().includes(nama.toLowerCase())) {
+            temporaryArray.push(produk);
+          }
+        }
+      } else {
+        for (let produk of Produk.produkList) {
+          if (produk.nama.toLowerCase().includes(nama.toLowerCase()) && produk.kategori === kategori) {
+            temporaryArray.push(produk);
+          }
+        }
+      }
+      this.produkTampil = temporaryArray;
+    }
+  }
+
+  tambahItem(produk: Produk_Temp) {
     this.keranjangService.tambahItem(produk);
-    this.updateTotalKeranjang();
   }
 
   tambahQty(produkId: number) {
     this.keranjangService.tambahQty(produkId);
-    this.updateTotalKeranjang();
   }
 
   kurangQty(produkId: number) {
     this.keranjangService.kurangQty(produkId);
-    this.updateTotalKeranjang();
   }
 
   getQty(produkId: number): number {
     return this.keranjangService.getQty(produkId);
   }
 
-  updateTotalKeranjang() {
-    this.totalKeranjang = this.keranjangService.hitungTotalJenisItem();
+  hitungTotalKeranjang(): number{
+    return this.keranjangService.hitungTotalJenisItem();
   }
 }

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Produk, ProdukService } from '../services/produk';
-import { Transaksi } from '../services/transaksi';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +9,7 @@ import { Transaksi } from '../services/transaksi';
 export class HomePage {
 
   jumlahProduk: number = 0;
-  constructor(private produkService: ProdukService, private transaksiService: Transaksi) { }
+  constructor() { }
 
   // bikin di transaksi utk hitung jumlah produk harian, total transaksi harian, dan produk terlaris hari itu
 

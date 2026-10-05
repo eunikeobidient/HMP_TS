@@ -80,12 +80,12 @@
     <p>Tidak ada produk ditemukan.</p>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="floating-cart-container" *ngIf="totalKeranjang > 0">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="floating-cart-container" *ngIf="hitungTotalKeranjang() > 0">
     <ion-fab-button color="success" class="cart-button" routerLink="/keranjang">
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>
     <ion-badge color="danger" class="floating-cart-badge">
-      {{ totalKeranjang }}
+      {{ hitungTotalKeranjang() }}
     </ion-badge>
   </ion-fab>
 </ion-content>

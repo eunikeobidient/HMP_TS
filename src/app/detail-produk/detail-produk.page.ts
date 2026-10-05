@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Produk, ProdukService } from '../services/produk';
+import { Produk_Temp, Produk } from '../produk';
 
 @Component({
   selector: 'app-detail-produk',
@@ -10,7 +10,7 @@ import { Produk, ProdukService } from '../services/produk';
 })
 export class DetailProdukPage implements OnInit {
   produkId = -1;
-  produk: Produk = {
+  produk: Produk_Temp = {
     id: -1,
     nama: "",
     kategori: "",
@@ -35,10 +35,10 @@ export class DetailProdukPage implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router, private produkService: ProdukService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private produkService: Produk) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.produkId = params['id']);
+    this.route.params.subscribe(params => this.produkId = Number(params['id']));
     this.produk = this.produkService.getProdukById(this.produkId);
   }
 

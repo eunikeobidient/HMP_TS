@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProdukService } from '../services/produk';
+import { Produk } from '../produk';
 
 @Component({
   selector: 'app-tambah-produk',
@@ -25,7 +25,7 @@ export class TambahProdukPage implements OnInit {
   public alertButtons = ['OK'];
 
   constructor(
-    private produkService: ProdukService,
+    private produkService: Produk,
     private router: Router
   ) { }
 
@@ -67,9 +67,9 @@ export class TambahProdukPage implements OnInit {
       this.produkService.tambahProduk(
         this.produkBaru.nama,
         this.produkBaru.kategori,
-        this.produkBaru.harga_beli,
-        this.produkBaru.harga_jual,
-        this.produkBaru.stock,
+        Number(this.produkBaru.harga_beli),
+        Number(this.produkBaru.harga_jual),
+        Number(this.produkBaru.stock),
         this.produkBaru.url || 'https://placehold.co/600x400/png'
       );
       this.showAlert = true;

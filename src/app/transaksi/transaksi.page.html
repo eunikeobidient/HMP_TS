@@ -16,8 +16,8 @@
     </ion-header>
 
     <ion-segment [(ngModel)]="jenisTampilan">
-      <ion-segment-button value="harian">
-        <ion-label>Harian</ion-label>
+      <ion-segment-button value="semua">
+        <ion-label>SEMUA TRANSAKSI</ion-label>
       </ion-segment-button>
       <ion-segment-button value="produk">
         <ion-label>Produk</ion-label>
@@ -25,9 +25,9 @@
     </ion-segment>
   </div>
 
-  <div *ngIf="jenisTampilan === 'harian'" class="tampilan">
-    <div *ngFor="let transaksi of riwayatTransaksi; let i=index">
-      <ion-row *ngIf="transaksi.bulan != bulanSaatIni || transaksi.tahun != tahunSaatIni">
+  <div *ngIf="jenisTampilan === 'semua'" class="tampilan">
+    <div *ngFor="let transaksi of ambilSemuaTransaksi(); let i=index">
+      <ion-row *ngIf="isNewMonthYear(i)">
         <ion-item class="month-year-header" lines="none">
           <ion-label>{{showHeaderBulanTahun(transaksi.bulan, transaksi.tahun)}}</ion-label>
         </ion-item>
