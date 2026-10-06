@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Produk } from '../produk';
+import { ProdukService } from '../produk.service';
 
 @Component({
   selector: 'app-tambah-produk',
@@ -25,7 +25,7 @@ export class TambahProdukPage implements OnInit {
   public alertButtons = ['OK'];
 
   constructor(
-    private produkService: Produk,
+    private produkService: ProdukService,
     private router: Router
   ) { }
 

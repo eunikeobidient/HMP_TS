@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Produk, Produk_Temp } from '../produk';
-import { Keranjang } from '../keranjang';
+import { ProdukService, Produk_Temp } from '../produk.service';
+import { KeranjangService } from '../keranjang.service';
 import { filter } from 'rxjs';
 
 @Component({
@@ -15,10 +15,14 @@ export class ListProdukPage {
   kategoriAktif: string = 'Semua';
   produkTampil: Produk_Temp[] = [];
 
-  constructor(private produkService: Produk, private keranjangService: Keranjang) { }
+  constructor(private produkService: ProdukService, private keranjangService: KeranjangService) { }
 
   ngOnInit() {
-    this.produkTampil = Produk.produkList;
+    this.muatProduk();
+  }
+
+  ionViewWillEnter(){
+    this.muatProduk();
   }
 
   muatProduk() {
@@ -29,10 +33,10 @@ export class ListProdukPage {
   filterProduk(nama: string = "", kategori: string = "Semua") {
     if (nama === "") {
       if (kategori === "Semua") {
-        this.produkTampil = Produk.produkList;
+        this.produkTampil = this.produkService.produkList;
       } else {
         let temporaryArray = [];
-        for (let produk of Produk.produkList) {
+        for (let produk of this.produkService.produkList) {
           if (produk.kategori === kategori) {
             temporaryArray.push(produk);
           }
@@ -42,13 +46,13 @@ export class ListProdukPage {
     } else {
       let temporaryArray = [];
       if (kategori === "Semua") {
-        for (let produk of Produk.produkList) {
+        for (let produk of this.produkService.produkList) {
           if (produk.nama.toLowerCase().includes(nama.toLowerCase())) {
             temporaryArray.push(produk);
           }
         }
       } else {
-        for (let produk of Produk.produkList) {
+        for (let produk of this.produkService.produkList) {
           if (produk.nama.toLowerCase().includes(nama.toLowerCase()) && produk.kategori === kategori) {
             temporaryArray.push(produk);
           }
@@ -78,3 +82,4 @@ export class ListProdukPage {
     return this.keranjangService.hitungTotalJenisItem();
   }
 }
+

@@ -36,13 +36,13 @@
       <ion-col>
         <ion-card>
           <ion-card-subtitle>Jumlah Produk</ion-card-subtitle>
-          <ion-card-title>100</ion-card-title>
+          <ion-card-title>{{ jumlahProduk }}</ion-card-title>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card>
           <ion-card-subtitle>Transaksi Hari Ini</ion-card-subtitle>
-          <ion-card-title>Rp 5.3M</ion-card-title>
+          <ion-card-title>Rp {{ totalTransaksiHariIni | number }}</ion-card-title>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -50,13 +50,15 @@
       <ion-col>
         <ion-card>
           <ion-card-subtitle>Produk Terlaris</ion-card-subtitle>
-          <ion-card-content>
-            <ion-img id="product-image"
-              src="https://image.astronauts.cloud/product-images/2026/7/IndomieGorengSpesial_414accae-05bf-440a-b59f-b9b621dc486c_900x900.png"></ion-img>
+          <ion-card-content *ngIf="produkTerlaris">
+            <ion-img id="product-image" [src]="produkTerlaris.url"></ion-img>
             <div id="product-text">
-              <ion-card-title class="product-text-item">Indomie Goreng</ion-card-title>
-              <ion-card-subtitle class="product-text-item">Jumlah Terjual: 10</ion-card-subtitle>
+              <ion-card-title class="product-text-item">{{ produkTerlaris.nama }}</ion-card-title>
+              <ion-card-subtitle class="product-text-item">Jumlah Terjual: {{ produkTerlaris.jumlah }}</ion-card-subtitle>
             </div>
+          </ion-card-content>
+          <ion-card-content *ngIf="!produkTerlaris" class="ion-text-center">
+            <p>Belum ada penjualan untuk hari ini.</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

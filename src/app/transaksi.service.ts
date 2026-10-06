@@ -1,5 +1,5 @@
-import { Service } from '@angular/core';
-import { Produk } from './produk';
+import { Injectable } from '@angular/core';
+import { ProdukService } from './produk.service';
 
 export interface RiwayatTransaksi {
     no_nota: string;
@@ -27,9 +27,15 @@ export interface DetailTransaksi {
     subtotal: number;
 }
 
-@Service()
-export class Transaksi {
-    static riwayatTransaksi: RiwayatTransaksi[] = [
+@Injectable({
+    providedIn: 'root'
+})
+
+export class TransaksiService {
+
+    constructor(private produkService: ProdukService){}
+
+    riwayatTransaksi: RiwayatTransaksi[] = [
         {
             no_nota: 'TMJ10012024001',
             tanggal: 10,
@@ -308,17 +314,18 @@ export class Transaksi {
     currentDate = new Date();
 
     listBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    
+
     showBulan(bulan: number): string {
         return this.listBulan[bulan - 1];
     }
 
     hitungJumlahTransaksiHariIni(): number {
-        const tanggalHariini = this.currentDate.getDate();
-        const bulanHariini = this.currentDate.getMonth() + 1;
-        const tahunHariini = this.currentDate.getFullYear();
+        const now = new Date();
+        const tanggalHariini = now.getDate();
+        const bulanHariini = now.getMonth() + 1;
+        const tahunHariini = now.getFullYear();
         let count = 0;
-        for (let transaksi of Transaksi.riwayatTransaksi) {
+        for (let transaksi of this.riwayatTransaksi) {
             if (transaksi.tanggal === tanggalHariini && transaksi.bulan === bulanHariini && transaksi.tahun === tahunHariini) {
                 count++;
             }
@@ -328,7 +335,7 @@ export class Transaksi {
 
     tambahTotalTerjual(newTransaksi: RiwayatTransaksi) {
         for (let produkBeli of newTransaksi.list_produk) {
-            for (let produk of Produk.produkList) {
+            for (let produk of this.produkService.produkList) {
                 if (produk.nama == produkBeli.nama_produk) {
                     produk.terjual += produkBeli.quantity;
                 }
@@ -339,7 +346,7 @@ export class Transaksi {
     showRiwayatProduk(bulan: number, tahun: number): RiwayatProduk[] {
         let riwayatProduk: RiwayatProduk[] = [];
 
-        for (let transaksi of Transaksi.riwayatTransaksi) {
+        for (let transaksi of this.riwayatTransaksi) {
             if (bulan != 0 && (transaksi.bulan != bulan || transaksi.tahun != tahun)) {
                 continue;
             }
@@ -356,14 +363,14 @@ export class Transaksi {
                     }
                 }
 
-                if(!isInRiwayatProduk){
+                if (!isInRiwayatProduk) {
                     let newRiwayatProduk: RiwayatProduk = {
                         id: riwayatProduk.length + 1,
                         nama_produk: produkBeli.nama_produk,
                         jumlah_terjual: produkBeli.quantity,
                         bulan: transaksi.bulan,
                         tahun: transaksi.tahun,
-                        url: this.findProdukUrl(produkBeli.nama_produk)
+                        url: this.produkService.findProdukUrl(produkBeli.nama_produk)
                     }
                     riwayatProduk.push(newRiwayatProduk);
                     isInRiwayatProduk = true;
@@ -373,15 +380,5 @@ export class Transaksi {
 
         return riwayatProduk;
     }
-
-    findProdukUrl(namaProduk: string): string{
-        let url = ""
-        for (let produk of Produk.produkList){
-            if(produk.nama === namaProduk){
-                url = produk.url;
-                break;
-            }
-        }
-        return url;
-    }
 }
+

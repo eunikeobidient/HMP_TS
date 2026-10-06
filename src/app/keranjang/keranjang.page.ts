@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemKeranjang, Keranjang } from '../keranjang';
-import { Produk } from '../produk';
-import { DetailTransaksi, RiwayatTransaksi, Transaksi } from '../transaksi';
+import { ItemKeranjang, KeranjangService } from '../keranjang.service';
+import { ProdukService } from '../produk.service';
+import { DetailTransaksi, RiwayatTransaksi, TransaksiService } from '../transaksi.service';
 
 @Component({
   selector: 'app-keranjang',
@@ -22,14 +22,14 @@ export class KeranjangPage {
   currentDate = new Date();
 
   constructor(
-    private keranjang: Keranjang,
-    private produkService: Produk,
-    private transaksiService: Transaksi,
+    private keranjang: KeranjangService,
+    private produkService: ProdukService,
+    private transaksiService: TransaksiService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.keranjangItem = Keranjang.listKeranjang;
+    this.keranjangItem = this.keranjang.listKeranjang;
   }
 
   tambahQty(produkId: number) {
@@ -55,18 +55,18 @@ export class KeranjangPage {
   konfirmasiTransaksi() {
     this.customerName = this.customerName.trim();
 
-    if(this.customerName == ""){
+    if (this.customerName == "") {
       this.namaKosong = true;
       return;
     }
 
-    if (Keranjang.listKeranjang.length === 0) {
+    if (this.keranjang.listKeranjang.length === 0) {
       this.keranjangKosong = true;
       return;
     }
 
     const detailTransaksi: DetailTransaksi[] = []
-    for (let item of Keranjang.listKeranjang) {
+    for (let item of this.keranjang.listKeranjang) {
       this.produkService.kurangiStok(item.produkId, item.qty);
       let newDetailTransaksi = {
         nama_produk: item.nama,
@@ -76,13 +76,14 @@ export class KeranjangPage {
       detailTransaksi.push(newDetailTransaksi);
     }
 
-    const tanggal = this.currentDate.getDate();
-    const bulan = this.currentDate.getMonth() + 1;
-    const tahun = this.currentDate.getFullYear();
+    const now = new Date();
+    const tanggal = now.getDate();
+    const bulan = now.getMonth() + 1;
+    const tahun = now.getFullYear();
 
-    const noTransaksi = String(this.transaksiService.hitungJumlahTransaksiHariIni() + 1).padStart(3,'0');
-    const dd = String(tanggal).padStart(2,'0');
-    const mm = String(bulan).padStart(2,'0');
+    const noTransaksi = String(this.transaksiService.hitungJumlahTransaksiHariIni() + 1).padStart(3, '0');
+    const dd = String(tanggal).padStart(2, '0');
+    const mm = String(bulan).padStart(2, '0');
 
     const nota = "TMJ" + dd + mm + tahun + noTransaksi;
 
@@ -98,14 +99,14 @@ export class KeranjangPage {
     }
 
     this.transaksiService.tambahTotalTerjual(newTransaksi);
-    Transaksi.riwayatTransaksi.unshift(newTransaksi);
+    this.transaksiService.riwayatTransaksi.unshift(newTransaksi);
 
     this.keranjang.kosongkanKeranjang();
     this.hapusCustomerName();
     this.router.navigate(['/detail-transaksi', 0]);
   }
 
-  hapusCustomerName(){
+  hapusCustomerName() {
     this.customerName = "";
     this.jenisPembayaran = "Tunai";
   }

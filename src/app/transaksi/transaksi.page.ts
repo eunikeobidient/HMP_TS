@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RiwayatProduk, Transaksi } from '../transaksi';
-import { Produk } from '../produk';
+import { RiwayatProduk, TransaksiService } from '../transaksi.service';
 
 @Component({
   selector: 'app-transaksi',
@@ -8,21 +7,23 @@ import { Produk } from '../produk';
   styleUrls: ['./transaksi.page.scss'],
   standalone: false,
 })
-export class TransaksiPage {
-  listBulan: any[] = [];
+export class TransaksiPage implements OnInit {
   jenisTampilan: string = "semua";
-
   filterBulan: number = 0;
   filterTahun: number = 0;
 
-  constructor(private transaksiService: Transaksi) { }
+  constructor(private transaksiService: TransaksiService) { }
 
-  ngOnInit() {
-    this.listBulan = this.transaksiService.listBulan;
+  ngOnInit() { }
+
+  // Ambil list bulan langsung dari Service
+  get listBulan(): any[] {
+    return this.transaksiService.listBulan;
   }
 
+  // Langsung me-return memori dari Service tanpa penampung lokal
   ambilSemuaTransaksi(): any[] {
-    return Transaksi.riwayatTransaksi;
+    return this.transaksiService.riwayatTransaksi;
   }
 
   showHeaderBulanTahun(bulan: number, tahun: number): string {

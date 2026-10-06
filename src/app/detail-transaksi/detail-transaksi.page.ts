@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Transaksi } from '../transaksi';
-import { Produk } from '../produk';
+import { TransaksiService } from '../transaksi.service';
+import { ProdukService } from '../produk.service';
 
 @Component({
   selector: 'app-detail-transaksi',
@@ -12,14 +12,14 @@ import { Produk } from '../produk';
 export class DetailTransaksiPage {
 
   index = 0;
-  constructor(private route: ActivatedRoute, private transaksiService: Transaksi) { }
+  constructor(private route: ActivatedRoute, private transaksiService: TransaksiService, private produkService: ProdukService) { }
   riwayatTransaksi: any[] = [];
   listProduk: any[] = [];
   
   ngOnInit() {
     this.route.params.subscribe(params => { this.index = Number(params['id']) || 0; })
-    this.riwayatTransaksi = Transaksi.riwayatTransaksi;
-    this.listProduk = Produk.produkList;
+    this.riwayatTransaksi = this.transaksiService.riwayatTransaksi;
+    this.listProduk = this.produkService.produkList;
   }
 
   showBulan(bulan: number): string {
@@ -36,3 +36,4 @@ export class DetailTransaksiPage {
     return url;
   }
 }
+

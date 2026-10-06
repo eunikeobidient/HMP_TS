@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Produk } from '../produk';
+import { ProdukService } from '../produk.service';
 
 @Component({
   selector: 'app-edit-produk',
@@ -25,7 +25,7 @@ export class EditProdukPage implements OnInit {
   showAlert = false;
   public alertButtons = ['OK'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private produkService: Produk) { }
+  constructor(private route: ActivatedRoute, private router: Router, private produkService: ProdukService) { }
   produkId = -1;
   ngOnInit() {
     this.route.params.subscribe(params => this.produkId = Number(params['id']));

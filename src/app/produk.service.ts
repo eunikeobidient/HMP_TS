@@ -1,4 +1,4 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export interface Produk_Temp {
     id: number;
@@ -11,9 +11,12 @@ export interface Produk_Temp {
     terjual: number;
 }
 
-@Service()
-export class Produk {
-    static produkList: Produk_Temp[] = [
+@Injectable({
+    providedIn: 'root'
+})
+
+export class ProdukService {
+    produkList: Produk_Temp[] = [
         { id: 1, nama: 'Beras Premium 5kg', kategori: 'Sembako', harga_beli: 58000, harga_jual: 65000, stock: 15, url: 'https://order.lottemart.co.id/_next/image?url=https%3A%2F%2Fcoreimages.lottemart.co.id%2Ford%2F06%2F1092483000&w=1920&q=75', terjual: 0 },
         { id: 2, nama: 'Minyak Goreng 2L', kategori: 'Sembako', harga_beli: 32000, harga_jual: 35000, stock: 0, url: 'https://down-id.img.susercontent.com/file/sg-11134201-23020-acjeupfkvinv60', terjual: 0 },
         { id: 3, nama: 'Gula Pasir 1kg', kategori: 'Sembako', harga_beli: 13500, harga_jual: 15000, stock: 5, url: 'https://pasarsegar.co.id/wp-content/uploads/2022/12/71faa2b0-05e0-4263-aa67-2b4b12ec9a95_Gulaku-Gula-Pasir-1-kg-11-1.jpeg', terjual: 0 },
@@ -27,23 +30,23 @@ export class Produk {
     ];
 
     getProdukById(id: number): Produk_Temp {
-        for (let i = 0; i < Produk.produkList.length; i++) {
-            if (Produk.produkList[i].id === id) {
-                return Produk.produkList[i];
+        for (let i = 0; i < this.produkList.length; i++) {
+            if (this.produkList[i].id === id) {
+                return this.produkList[i];
             }
         }
-        throw new Error("Produk tidak ditemukan");
+        throw new Error("this tidak ditemukan");
     }
 
     tambahProduk(nama: string, kategori: string, harga_beli: number, harga_jual: number, stock: number, url: string) {
         let idBaru = 1;
-        for (let i = 0; i < Produk.produkList.length; i++) {
-            if (Produk.produkList[i].id >= idBaru) {
-                idBaru = Produk.produkList[i].id + 1;
+        for (let i = 0; i < this.produkList.length; i++) {
+            if (this.produkList[i].id >= idBaru) {
+                idBaru = this.produkList[i].id + 1;
             }
         }
 
-        Produk.produkList.push({
+        this.produkList.push({
             id: idBaru,
             nama: nama,
             kategori: kategori,
@@ -56,7 +59,7 @@ export class Produk {
     }
 
     editProduk(id: number, nama: string, kategori: string, harga_beli: number, harga_jual: number, stock: number, url: string) {
-        for (let produk of Produk.produkList) {
+        for (let produk of this.produkList) {
             if (produk.id === id) {
                 produk.nama = nama;
                 produk.kategori = kategori;
@@ -69,9 +72,9 @@ export class Produk {
     }
 
     hapusProduk(id: number) {
-        for (let i = 0; i < Produk.produkList.length; i++) {
-            if (Produk.produkList[i].id == id) {
-                Produk.produkList.splice(i, 1);
+        for (let i = 0; i < this.produkList.length; i++) {
+            if (this.produkList[i].id == id) {
+                this.produkList.splice(i, 1);
                 break;
             }
         }
@@ -86,4 +89,16 @@ export class Produk {
         }
         return false;
     }
+
+    findProdukUrl(namaProduk: string): string {
+        let url = ""
+        for (let produk of this.produkList) {
+            if (produk.nama === namaProduk) {
+                url = produk.url;
+                break;
+            }
+        }
+        return url;
+    }
 }
+
