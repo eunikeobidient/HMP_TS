@@ -1,6 +1,6 @@
 <ion-app>
   <ion-router-outlet id="main-content"></ion-router-outlet>
-  <ion-tabs>
+  <ion-tabs *ngIf="isLoggedIn">
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="home">
         <ion-icon name="home"></ion-icon>
@@ -21,7 +21,7 @@
     </ion-tab-bar>
   </ion-tabs>
   
-  <ion-menu auto-hide="true" content-id="main-content">
+  <ion-menu auto-hide="true" content-id="main-content" *ngIf="isLoggedIn">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu List</ion-title>
@@ -42,7 +42,7 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item routerLink="/login">
+          <ion-item routerLink="/login" (click)="logout()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
             <ion-label>Logout</ion-label>
           </ion-item>
