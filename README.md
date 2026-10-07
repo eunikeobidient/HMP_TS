@@ -49,17 +49,20 @@ Berikut adalah daftar fitur lengkap yang telah selesai dibangun sesuai dengan ke
      - [Produk Service](src/app/produk.service.ts) — Pengelolaan data katalog, stok, dan mutasi produk.
      - [Keranjang Service](src/app/keranjang.service.ts) — Pengelolaan cart, quantity, dan kalkulasi subtotal/total belanja.
      - [Transaksi Service](src/app/transaksi.service.ts) — Pengelolaan rekap transaksi, riwayat nota, dan analitik penjualan.
+     - [Auth Service](src/app/auth.ts) - Service untuk autentikasi dummy
+     - [Auth Guard](src/app/auth.guard.ts) - Service yang digunakan untuk mengecek apakah autentikasi telah dilakukan (dipanggil di app routing dengan method canActivate)
 8. **Kustomisasi Tema & Dark Mode**:
    - Custom styling palet warna toko khas (Nuansa Hijau & Kuning) pada `src/theme/variables.scss`.
    - Toggle switch mode Gelap (Dark Mode) dan mode Terang (Light Mode) pada menu Pengaturan.
 9. **Animasi Halus & Interaktif**:
-   - Animasi bumper screen & transisi halus pada *Splash Screen* menggunakan `AnimationController`.
+   - Animasi bumper screen & transisi halus pada *Splash Screen* menggunakan `AnimationController` di awal aplikasi.
    - Efek animasi bouncing (*Tuing*) pada Floating Cart Badge saat item ditambahkan ke keranjang.
    - Fitur swipe-to-delete item keranjang menggunakan `ion-item-sliding`.
 10. **Keranjang Kasir & Simulasi Checkout**:
     - Perhitungan otomatis subtotal per item dan total harga keseluruhan.
     - Input nama pelanggan serta pilihan metode pembayaran (*Tunai, QRIS, Transfer Bank, E-Wallet*).
     - Konfirmasi transaksi otomatis memotong stok produk dan menyimpan nota baru.
+    - Mengimplementasikan ChangeDetectorRef.detectChanges() untuk memaksa pembaruan (re-render) antarmuka HTML. Hal ini secara efektif mengatasi isu Change Detection Angular, sehingga layar dapat langsung menampilkan data terbaru meskipun referensi memori array di dalam Service tidak berubah.
 11. **Riwayat Transaksi & Detail Nota**:
     - Tampilan rekap transaksi terkelompok per bulan dan tahun.
     - Tampilan rekap penjualan kuantitas per produk.
@@ -80,7 +83,8 @@ cd HMP_TS
 
 ### 2. Install Dependensi
 ```bash
-npm install
+npm install -g @ionic/cli
+npm install @angular/cli
 ```
 
 ### 3. Menjalankan Server Development
