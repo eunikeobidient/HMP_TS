@@ -77,7 +77,7 @@ Pastikan Anda telah menginstal [Node.js](https://nodejs.org/) (versi LTS) dan [I
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/username/HMP_TS.git
+git clone https://github.com/eunikeobidient/HMP_TS.git
 cd HMP_TS
 ```
 
