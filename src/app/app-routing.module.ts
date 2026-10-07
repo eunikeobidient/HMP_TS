@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'splash-screen',
     pathMatch: 'full'
   },
   {
@@ -67,6 +67,11 @@ const routes: Routes = [
     loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'splash-screen',
+    loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+
 
 ];
 
