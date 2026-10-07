@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { ProdukService } from '../produk.service';
 import { TransaksiService } from '../transaksi.service';
 
@@ -9,15 +10,24 @@ import { TransaksiService } from '../transaksi.service';
   standalone: false,
 })
 export class HomePage {
+  jumlahProduk: number = 0;
+  totalTransaksiHariIni: number = 0;
+  produkTerlaris: any = null;
 
-  constructor(private produkService: ProdukService, private transaksiService: TransaksiService) { }
+  constructor(
+    private produkService: ProdukService,
+    private transaksiService: TransaksiService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-  // Gunakan 'get' agar data selalu ter-update otomatis
-  get jumlahProduk(): number {
-    return this.produkService.produkList.length;
+  ionViewWillEnter() {
+    this.jumlahProduk = this.produkService.produkList.length;
+    this.totalTransaksiHariIni = this.hitungTotalTransaksiHariIni();
+    this.produkTerlaris = this.hitungProdukTerlaris();
+    this.cdr.detectChanges();
   }
 
-  get totalTransaksiHariIni(): number {
+  hitungTotalTransaksiHariIni(): number {
     const now = new Date();
     const tglHariIni = now.getDate();
     const blnHariIni = now.getMonth() + 1;
@@ -32,7 +42,7 @@ export class HomePage {
     return totalUang;
   }
 
-  get produkTerlaris(): any {
+  hitungProdukTerlaris(): any {
     const now = new Date();
     const tglHariIni = now.getDate();
     const blnHariIni = now.getMonth() + 1;
@@ -70,11 +80,7 @@ export class HomePage {
           break;
         }
       }
-      return {
-        nama: namaTerlaris,
-        jumlah: qtyTerbanyak,
-        url: urlGambar
-      };
+      return { nama: namaTerlaris, jumlah: qtyTerbanyak, url: urlGambar };
     }
     return null;
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { RiwayatProduk, TransaksiService } from '../transaksi.service';
 
 @Component({
@@ -7,21 +8,24 @@ import { RiwayatProduk, TransaksiService } from '../transaksi.service';
   styleUrls: ['./transaksi.page.scss'],
   standalone: false,
 })
-export class TransaksiPage implements OnInit {
+export class TransaksiPage {
   jenisTampilan: string = "semua";
   filterBulan: number = 0;
   filterTahun: number = 0;
 
-  constructor(private transaksiService: TransaksiService) { }
+  constructor(
+    private transaksiService: TransaksiService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-  ngOnInit() { }
+  ionViewWillEnter() {
+    this.cdr.detectChanges();
+  }
 
-  // Ambil list bulan langsung dari Service
   get listBulan(): any[] {
     return this.transaksiService.listBulan;
   }
 
-  // Langsung me-return memori dari Service tanpa penampung lokal
   ambilSemuaTransaksi(): any[] {
     return this.transaksiService.riwayatTransaksi;
   }

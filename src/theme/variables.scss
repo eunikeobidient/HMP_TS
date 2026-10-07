@@ -92,6 +92,18 @@ body.dark {
         color: #e0e0e0 !important;
     }
 
+    ion-alert {
+        --background: #1e1e1e;
+    }
+
+    .alert-radio-label {
+        color: #ffffff !important;
+    }
+
+    .alert-radio-icon {
+        border-color: #888888 !important;
+    }
+
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18,
     18,
