@@ -104,9 +104,7 @@ Aplikasi akan terbuka otomatis di browser Anda pada alamat `http://localhost:810
 ## 👥 Tim Pengembang (Team TS)
 Aplikasi ini dikembangkan untuk Ujian Tengah Semester (UTS) mata kuliah **Hybrid Mobile Programming**:
 | Nama Mahasiswa | NRP |
-
 |---|---|
-
 | **Soen Hizkia** | 160424017 |
 | **Eunike Obidient Djuwari** | 160424019 |
 | **Han Christian Gunawan** | 160424041 |
