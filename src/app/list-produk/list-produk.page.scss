@@ -160,12 +160,12 @@
 
 .floating-cart-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -4px;
+    right: -4px;
     font-size: 12px;
     border-radius: 50%;
-    padding: 4px 6px;
-    z-index: 1000;
+    padding: 6px 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #btn-clear {
