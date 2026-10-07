@@ -9,11 +9,12 @@ h1 {
   position: relative;
   top: 50px;
   padding-bottom: 50px;
+  background-color: var(--ion-background-color);
 }
 
 .fixed-pos {
   position: fixed;
-  background-color: black;
+  background-color: var(--ion-background-color);
   width: 100%;
   z-index: 20;
 }

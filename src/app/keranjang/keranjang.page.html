@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button routerLink="/list-produk">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
@@ -72,7 +72,7 @@
       </ion-select>
     </div>
 
-    <ion-button id="btnSubmit" expand="block" color="success" class="confirm-btn"
+    <ion-button id="btnSubmit" expand="block" color="primary" class="confirm-btn"
       [disabled]="keranjangItem.length === 0" (click)="konfirmasiTransaksi()">
       Konfirmasi Transaksi
     </ion-button>

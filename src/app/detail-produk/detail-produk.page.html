@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/list-produk"></ion-back-button>
     </ion-buttons>
@@ -37,10 +37,6 @@
         <ion-row>
           <ion-col><ion-card-subtitle class="property-label">Stok</ion-card-subtitle></ion-col>
           <ion-col><ion-card-subtitle class="value-label">: {{produk.stock}} pcs</ion-card-subtitle></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col><ion-card-subtitle class="property-label">Terjual</ion-card-subtitle></ion-col>
-          <ion-col><ion-card-subtitle class="value-label">: {{produk.terjual}} pcs</ion-card-subtitle></ion-col>
         </ion-row>
       </ion-grid>
       <ion-button class="btn-bottom" color="success" routerLink="/edit-produk/{{produk.id}}">

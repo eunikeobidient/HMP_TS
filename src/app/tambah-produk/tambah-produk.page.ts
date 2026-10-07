@@ -73,7 +73,19 @@ export class TambahProdukPage implements OnInit {
         this.produkBaru.url || 'https://placehold.co/600x400/png'
       );
       this.showAlert = true;
+      this.clearPages();
     }
+  }
+
+  clearPages() {
+    this.produkBaru = {
+      nama: '',
+      kategori: 'Sembako',
+      harga_beli: 0,
+      harga_jual: 0,
+      stock: 0,
+      url: ''
+    };
   }
 
   onAlertDismiss() {

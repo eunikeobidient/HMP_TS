@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -35,13 +35,13 @@
     <ion-row>
       <ion-col>
         <ion-card>
-          <ion-card-subtitle>Jumlah Produk</ion-card-subtitle>
+          <ion-card-subtitle color="tertiary">Jumlah Produk</ion-card-subtitle>
           <ion-card-title>{{ jumlahProduk }}</ion-card-title>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card>
-          <ion-card-subtitle>Transaksi Hari Ini</ion-card-subtitle>
+          <ion-card-subtitle color="secondary">Transaksi Hari Ini</ion-card-subtitle>
           <ion-card-title>Rp {{ totalTransaksiHariIni | number }}</ion-card-title>
         </ion-card>
       </ion-col>

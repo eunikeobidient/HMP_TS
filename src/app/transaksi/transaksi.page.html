@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -15,7 +15,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-segment [(ngModel)]="jenisTampilan">
+    <ion-segment [(ngModel)]="jenisTampilan" color="primary">
       <ion-segment-button value="semua">
         <ion-label>SEMUA TRANSAKSI</ion-label>
       </ion-segment-button>
@@ -39,11 +39,11 @@
           <p class="year">{{transaksi.tahun}}</p>
         </ion-card-subtitle>
         <ion-card-subtitle class="transaction-info">
-          <p class="receipt-number">{{transaksi.no_nota}}</p>
+          <p class="receipt-number" style="color: var(--ion-color-primary); font-weight: bold;">{{transaksi.no_nota}}</p>
           <p>{{transaksi.customer}}</p>
           <P>Rp{{transaksi.harga_total}}</P>
         </ion-card-subtitle>
-        <ion-button class="btn-detail" routerLink="/detail-transaksi/{{i}}">
+        <ion-button class="btn-detail" color="primary" routerLink="/detail-transaksi/{{i}}">
           <ion-label>Detail</ion-label>
         </ion-button>
       </ion-card>
@@ -66,7 +66,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-button style="width: 100%;" (click)="hapusFilterBulanTahun()">
+        <ion-button style="width: 100%;" (click)="hapusFilterBulanTahun()" color="primary">
           <ion-label>Hapus Filter</ion-label>
         </ion-button>
       </ion-row>
