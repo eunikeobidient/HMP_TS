@@ -29,7 +29,17 @@ export class EditProdukPage implements OnInit {
   produkId = -1;
   ngOnInit() {
     this.route.params.subscribe(params => this.produkId = Number(params['id']));
-    this.produk = this.produkService.getProdukById(this.produkId);
+    let data = this.produkService.getProdukById(this.produkId);
+    this.produk = {
+      id: data.id,
+      nama: data.nama,
+      kategori: data.kategori,
+      harga_beli: data.harga_beli,
+      harga_jual: data.harga_jual,
+      stock: data.stock,
+      url: data.url
+    };
+
   }
 
   isInvalidNama(): boolean {
