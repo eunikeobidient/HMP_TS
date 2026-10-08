@@ -65,7 +65,6 @@ export class SplashScreenPage implements OnInit {
 
     await fadeOutAnim.play();
 
-    // 4. Setelah layar memudar, otomatis pindah ke Login
     this.router.navigate(['/login'], { replaceUrl: true });
   }
 }
