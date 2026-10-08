@@ -20,6 +20,12 @@ export class HomePage {
     private cdr: ChangeDetectorRef
   ) { }
 
+  ngOnInit() {
+    this.jumlahProduk = this.produkService.produkList.length;
+    this.totalTransaksiHariIni = this.hitungTotalTransaksiHariIni();
+    this.produkTerlaris = this.hitungProdukTerlaris();
+  }
+
   ionViewWillEnter() {
     this.jumlahProduk = this.produkService.produkList.length;
     this.totalTransaksiHariIni = this.hitungTotalTransaksiHariIni();
